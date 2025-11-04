@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WAHGNU — Témoignages</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f7fa;--panel:#fff;--accent:#007bff;--muted:#6b7280}
+  body{font-family:'Poppins';margin:0;background:var(--bg);color:#07203a;transition:background .3s}
+  body.dark{--bg:#071022;--panel:rgba(255,255,255,0.03);--accent:#00b8f1;color:#e6f6ff}
+  header{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:var(--panel);box-shadow:0 2px 8px rgba(2,6,23,0.04)}
+  .logo{font-weight:800;background:linear-gradient(90deg,#0049b7,#00d9ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .wrap{max-width:980px;margin:20px auto;padding:20px}
+  .card{background:var(--panel);border-radius:12px;padding:16px;box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+  .composer{display:grid;gap:12px}
+  input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:inherit}
+  .emoji-grid{display:flex;gap:8px;flex-wrap:wrap}
+  .emoji-btn{font-size:20px;padding:8px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer}
+  .emoji-btn.active{outline:3px solid rgba(0,120,220,0.18)}
+  .feed{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+  .post{display:flex;gap:14px;align-items:flex-start}
+  .avatar{width:54px;height:54px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(0,0,0,0.03)}
+  .post-body{flex:1}
+  .who{display:flex;gap:10px;align-items:center}
+  .meta{color:var(--muted);font-size:13px}
+  .actions{display:flex;gap:10px;margin-top:8px}
+  .small{font-size:13px;color:var(--muted)}
+  .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;border:none;cursor:pointer}
+  .like-btn.liked{opacity:0.7}
+  @media(max-width:720px){.post{flex-direction:column}.avatar{width:44px;height:44px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">WAHGNU</div>
+  <div>
+    <a onclick="go('index.html')">Accueil</a> |
+    <a onclick="go('connexion.html')">Connexion</a>
+    <button id="themeBtn" style="margin-left:8px">🌓</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <h2 id="catTitle">Témoignages — Catégorie</h2>
+    <p class="small" id="catDesc">Partage anonymement.</p>
+
+    <form id="composer" class="composer">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="avatar" id="previewEmoji">🙂</div>
+        <input id="pseudo" placeholder="Pseudo (optionnel)" maxlength="30" />
+      </div>
+
+      <div>
+        <div class="small">Choisis un emoji</div>
+        <div class="emoji-grid" id="emojiGrid"></div>
+      </div>
+
+      <div>
+        <textarea id="message" placeholder="Écris ton témoignage..." required></textarea>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="small">Publication anonyme · Respect & bienveillance</div>
+        <div style="display:flex;gap:8px">
+          <button type="button" class="btn" id="clearBtn">Effacer</button>
+          <button type="submit" class="btn">Publier</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="feed" style="margin-top:18px"></div>
+</main>
+
+<script>
+(function(){
