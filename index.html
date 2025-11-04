@@ -1,0 +1,202 @@
+fr <!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WAKH NÜ — Accueil</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f0f4f8; --panel:#ffffff; --accent:#007bff; --text:#07203a; --muted:#6b7280;
+    --glass: rgba(255,255,255,0.7);
+  }
+  body{font-family:'Poppins',system-ui; margin:0; color:var(--text); background:var(--bg); transition:background .3s,color .3s;}
+  body.dark{ --bg: #071022; --panel: rgba(255,255,255,0.03); --accent:#00b8f1; --text:#e6f6ff; --muted:#9aa6b2; --glass: rgba(255,255,255,0.03); }
+  header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--panel);box-shadow:0 2px 10px rgba(2,6,23,0.05)}
+  .logo{font-weight:800;font-size:22px;background:linear-gradient(90deg,#0049b7,#00d9ff,#000);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  nav a{margin-left:18px;color:var(--text);text-decoration:none;font-weight:600}
+  .hero{display:flex;gap:30px;align-items:center;padding:60px; background:linear-gradient(90deg, rgba(0,73,183,0.06) 0%, rgba(255,255,255,0.6) 60%); border-radius:14px; margin:24px;}
+  .hero-left{flex:1}
+  .hero-left h1{font-size:36px;margin:0 0 12px 0;color:var(--text)}
+  .hero-left p{color:var(--muted);margin:0 0 18px 0}
+  .btn{background:var(--accent);color:white;padding:12px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .categories{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:30px;margin:24px;background:var(--panel);border-radius:12px;backdrop-filter: blur(6px)}
+  .category{text-align:center;background:var(--glass);padding:18px;border-radius:12px;cursor:pointer;transition:transform .25s,box-shadow .25s}
+  .category:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,0.08)}
+  .postcard-wrap{display:flex;justify-content:center;padding:30px}
+  .postcard{max-width:900px;background:var(--panel);border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(2,6,23,0.06);display:flex;gap:0}
+  .postcard img{width:50%;object-fit:cover}
+  .postcard .text{padding:24px;flex:1}
+  footer{text-align:center;padding:18px;color:var(--muted)}
+  .top-controls{display:flex;gap:10px;align-items:center}
+  .toggle{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:10px;cursor:pointer}
+  @media(max-width:900px){.hero{flex-direction:column}.postcard{flex-direction:column}.postcard img{width:100%}}
+
+  /* Login styles */
+  .login-section { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
+  .wrap{max-width:900px;margin:40px auto;padding:20px;display:flex;gap:20px;align-items:center}
+  .left{flex:1;background:var(--panel);padding:28px;border-radius:14px;box-shadow:0 12px 40px rgba(2,6,23,0.06)}
+  .right{width:360px}
+  h1{margin:0 0 12px 0}
+  label{display:block;margin-bottom:6px;color:var(--muted);font-size:13px}
+  input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);margin-bottom:12px}
+  .small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:center;gap:18px">
+    <div class="logo">WAKH NÜ</div>
+  </div>
+  <div class="top-controls">
+    <nav>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})">Accueil</a>
+      <a href="#" onclick="showLogin()">Connexion</a>
+      <a href="apropos.html" onclick="go('apropos.html')">À propos</a>
+    </nav>
+    <button class="toggle" id="themeToggle">🌓</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-left">
+      <h1 id="hero-title">Partage ton expérience anonymement</h1>
+      <p>WAKH NÜ est un espace bienveillant où tu peux publier des témoignages anonymes : amour, famille, jeunesse, intimité, santé…</p>
+      <div style="display:flex;gap:12px">
+        <button class="btn" onclick="showLogin()">Commencer</button>
+        <button class="btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--accent);border:1px solid rgba(0,0,0,0.06)">Découvrir</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="categories" class="categories" aria-label="Catégories">
+    <div class="category" onclick="go('max.html')">
+      <h3>Amour</h3>
+      <p style="color:var(--muted)">Récits de cœur et rencontres</p>
+    </div>
+    <div class="category" onclick="go('max.html')">
+      <h3>Famille</h3>
+      <p style="color:var(--muted)">Histoires familiales et liens</p>
+    </div>
+    <div class="category" onclick="go('max.html')">
+      <h3>Jeunesse</h3>
+      <p style="color:var(--muted)">Doutes, rêves, apprentissages</p>
+    </div>
+    <div class="category" onclick="go('max.html')">
+      <h3>Sexe</h3>
+      <p style="color:var(--muted)">Intimité et expériences</p>
+    </div>
+    <div class="category" onclick="go('max.html')">
+      <h3>Santé</h3>
+      <p style="color:var(--muted)">Parcours, bien-être, guérison</p>
+    </div>
+    <div class="category" onclick="go('max.html')">
+      <h3>Autres</h3>
+      <p style="color:var(--muted)">Autres sujets et expériences</p>
+    </div>
+  </section>
+
+
+
+</main>
+
+<footer>© 2025 WAKH NÜ — Tous droits réservés.</footer>
+
+<div class="login-section" id="loginSection">
+  <div class="wrap">
+    <div class="left">
+      <h1>Se connecter</h1>
+      <p class="small">Connecte-toi pour publier et gérer tes publications (système local pour le moment).</p>
+
+      <div>
+        <label>Identifiant (pseudo ou email)</label>
+        <input id="loginId" placeholder="ex : Luna42" />
+        <label>Mot de passe</label>
+        <input id="loginPwd" type="password" />
+        <div style="display:flex;gap:10px">
+          <button class="btn" id="loginBtn">Se connecter</button>
+          <button class="btn" id="toSignup" style="background:#fff;color:var(--accent);border:1px solid rgba(0,0,0,0.06)">Créer un compte</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div style="background:var(--panel);padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.06)">
+        <h2 style="margin-top:0">Créer un compte</h2>
+        <label>Pseudo</label>
+        <input id="signupPseudo" />
+        <label>Email</label>
+        <input id="signupEmail" />
+        <label>Mot de passe</label>
+        <input id="signupPwd" type="password" />
+        <button class="btn" id="signupBtn" style="width:100%;margin-top:8px">Créer</button>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px">Les comptes sont stockés localement (pour proto). Pour multi-utilisateurs, on ajoutera un backend.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // navigation helper with fade
+  function go(url){
+    document.body.style.transition = 'opacity .45s';
+    document.body.style.opacity = 0;
+    setTimeout(()=> window.location.href = url, 420);
+  }
+
+  function showLogin(){
+    document.getElementById('loginSection').style.display = 'flex';
+  }
+
+  // theme handling
+  const themeToggle = document.getElementById('themeToggle');
+  function applyTheme(t){
+    if(t === 'dark') document.body.classList.add('dark');
+    else document.body.classList.remove('dark');
+    localStorage.setItem('wahgnu_theme', t);
+  }
+  themeToggle.addEventListener('click', ()=>{
+    const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+    applyTheme(next);
+  });
+  // init
+  (function(){
+    const saved = localStorage.getItem('wahgnu_theme') || 'light';
+    applyTheme(saved);
+    document.body.style.opacity = 1;
+  })();
+
+  // login functionality
+  function loadUsers(){ try{return JSON.parse(localStorage.getItem('wahgnu_users')||'[]')}catch(e){return []} }
+  function saveUsers(u){ localStorage.setItem('wahgnu_users', JSON.stringify(u)) }
+  function hashPwd(p){ return btoa(p) } // simple for prototype
+
+  document.getElementById('signupBtn').addEventListener('click', ()=>{
+    const pseudo = document.getElementById('signupPseudo').value.trim();
+    const email = document.getElementById('signupEmail').value.trim();
+    const pwd = document.getElementById('signupPwd').value;
+    if(!pseudo || !email || !pwd) return alert('Remplis tous les champs pour créer un compte.');
+    const users = loadUsers();
+    if(users.some(u => u.email === email)) return alert('Un compte avec cet email existe déjà.');
+    users.push({pseudo, email, pwd: hashPwd(pwd)});
+    saveUsers(users);
+    alert('Compte créé ✅ Tu peux maintenant te connecter.');
+    document.getElementById('signupPseudo').value=''; document.getElementById('signupEmail').value=''; document.getElementById('signupPwd').value='';
+  });
+
+  document.getElementById('loginBtn').addEventListener('click', ()=>{
+    const id = document.getElementById('loginId').value.trim();
+    const pwd = document.getElementById('loginPwd').value;
+    if(!id || !pwd) return alert('Identifiant et mot de passe requis.');
+    const users = loadUsers();
+    const user = users.find(u => u.email===id || u.pseudo===id);
+    if(!user || user.pwd !== hashPwd(pwd)) return alert('Identifiant ou mot de passe incorrect.');
+    localStorage.setItem('wahgnu_session', JSON.stringify({pseudo: user.pseudo, email: user.email}));
+    alert('Connexion réussie ✅');
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('loginId').value=''; document.getElementById('loginPwd').value='';
+  });
+</script>
+</body>
+</html>
