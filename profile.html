@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil - WAKH NÜ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #eee;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .current-avatar {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .avatar-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 10px;
+      margin-bottom: 30px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .avatar-option {
+      font-size: 40px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    .avatar-option:hover {
+      background: #f0f0f0;
+    }
+
+    .avatar-option.selected {
+      background: #e0e0e0;
+      border: 2px solid #000;
+    }
+
+    button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    button:hover {
+      background: #222;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #333;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Modifier votre Profil</h1>
+    <div class="current-avatar" id="currentAvatar">👤</div>
+    <div class="avatar-selector" id="avatarSelector">
+      <!-- Avatars will be loaded here -->
+    </div>
+    <button id="saveBtn">Enregistrer</button>
+    <button id="cancelBtn">Annuler</button>
+    <br>
+    <a href="index.html" class="back-link">Retour à l'accueil</a>
+  </div>
+
+  <script>
+    const avatars = ['😀', '😎', '🤓', '😍', '🥳', '🤖', '👽', '🦄', '🐱', '🐶', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐸', '🐵', '🙈', '🙉', '🙊', '🐔', '🐧', '🐦', '🐤', '🐣', '🐥', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛', '🦋', '🐌', '🐞', '🐜', '🦗', '🕷️', '🦂', '🐢', '🐍', '🦎', '🦖', '🦕', '🐙', '🦑', '🦐', '🦞', '🦀', '🐡', '🐠', '🐟', '🐬', '🐳', '🐋', '🦈', '🐊', '🐅', '🐆', '🦓', '🦍', '🦧', '🐘', '🦛', '🦏', '🐪', '🐫', '🦒', '🦘', '🐃', '🐂', '🐄', '🐎', '🐖', '🐏', '🐑', '🦙', '🐐', '🦌', '🐕', '🐩', '🦮', '🐕‍🦺', '🐈', '🐈‍⬛', '🪶', '🐓', '🦃', '🦚', '🦜', '🦢', '🦩', '🕊️', '🐇', '🦝', '🦨', '🦡', '🦦', '🦥', '🐁', '🐀', '🐿️', '🦔'];
+    let selectedAvatar = '👤';
+
+    function loadUsers(){ try{return JSON.parse(localStorage.getItem('wahgnu_users')||'[]')}catch(e){return []} }
+    function saveUsers(u){ localStorage.setItem('wahgnu_users', JSON.stringify(u)) }
+
+    function loadCurrentUser(){
+      const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
+      if (!session) {
+        alert('Vous devez être connecté pour accéder à cette page.');
+        window.location.href = 'login.html';
+        return null;
+      }
+      const users = loadUsers();
+      return users.find(u => u.pseudo === session.pseudo);
+    }
+
+    function renderAvatars(){
+      const selector = document.getElementById('avatarSelector');
+      selector.innerHTML = '';
+      const currentUser = loadCurrentUser();
+      if (currentUser) {
+        selectedAvatar = currentUser.avatar || '👤';
+        document.getElementById('currentAvatar').textContent = selectedAvatar;
+      }
+      avatars.forEach(emoji => {
+        const div = document.createElement('div');
+        div.className = 'avatar-option';
+        div.textContent = emoji;
+        if (emoji === selectedAvatar) div.classList.add('selected');
+        div.addEventListener('click', () => {
+          selectedAvatar = emoji;
+          document.querySelectorAll('.avatar-option').forEach(d => d.classList.remove('selected'));
+          div.classList.add('selected');
+          document.getElementById('currentAvatar').textContent = emoji;
+        });
+        selector.appendChild(div);
+      });
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', ()=>{
+      const currentUser = loadCurrentUser();
+      if (currentUser) {
+        currentUser.avatar = selectedAvatar;
+        const users = loadUsers();
+        const index = users.findIndex(u => u.pseudo === currentUser.pseudo);
+        if (index !== -1) {
+          users[index] = currentUser;
+          saveUsers(users);
+          alert('Profil mis à jour !');
+          window.location.href = 'index.html';
+        }
+      }
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', ()=>{
+      window.location.href = 'index.html';
+    });
+
+    renderAvatars();
+  </script>
+</body>
+</html>

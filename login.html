@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Register</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #eee;
+    }
+
+    .container {
+      position: relative;
+      width: 850px;
+      height: 500px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .form-box {
+      position: absolute;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+      transition: 0.6s ease-in-out 1.2s, visibility 0s 1s;
+      z-index: 1;
+    }
+
+    .form-box h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      outline: none;
+      background: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .form-box button:hover {
+      background: #222;
+    }
+
+    .toggle-box {
+      position: absolute;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+      transition: 0.6s ease-in-out;
+    }
+
+    .toggle-box h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .toggle-box p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .toggle-box button {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .toggle-box button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* Animation côté droit/gauche */
+    .container.active .form-box {
+      right: 50%;
+    }
+
+    .container.active .toggle-box {
+      left: 50%;
+    }
+
+    .form-box.register {
+      right: -50%;
+    }
+
+    .container.active .form-box.register {
+      right: 0;
+    }
+
+    .toggle-box-register {
+      left: -50%;
+    }
+
+    .container.active .toggle-box-register {
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="container">
+    <!-- Formulaire de Connexion -->
+    <div class="form-box login" id="login-box">
+      <h2>Connexion</h2>
+      <input type="text" id="loginId" placeholder="Nom d'utilisateur">
+      <input type="password" id="loginPwd" placeholder="Mot de passe">
+      <button id="loginBtn">Se connecter</button>
+      <button onclick="alert('Fonctionnalité à venir')" style="background: transparent; border: 1px solid #ccc; color: #333; margin-top: 10px;">Mot de passe oublié</button>
+    </div>
+
+    <!-- Formulaire d'Inscription -->
+    <div class="form-box register" id="register-box">
+      <h2>Inscription</h2>
+      <input type="text" id="signupPseudo" placeholder="Pseudo">
+      <input type="email" id="signupEmail" placeholder="Email">
+      <input type="password" id="signupPwd" placeholder="Mot de passe">
+      <button id="signupBtn">S'inscrire</button>
+    </div>
+
+    <!-- Panneau noir -->
+    <div class="toggle-box" id="toggle-box">
+      <h2>Bonjour, Bienvenue !</h2>
+      <p>Vous n'avez pas de compte ?</p>
+      <button id="registerBtn">S'inscrire</button>
+    </div>
+
+    <!-- Panneau noir pour inscription -->
+    <div class="toggle-box toggle-box-register" id="toggle-box-register">
+      <h2>Salut, Ami !</h2>
+      <p>Vous avez déjà un compte ?</p>
+      <button id="loginBtnToggle">Se connecter</button>
+    </div>
+
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+    container.classList.add("active"); // Show registration by default
+    const registerBtn = document.getElementById("registerBtn");
+    const loginBtnToggle = document.getElementById("loginBtnToggle");
+
+    registerBtn.addEventListener("click", () => {
+      container.classList.add("active");
+    });
+
+    loginBtnToggle.addEventListener("click", () => {
+      container.classList.remove("active");
+    });
+
+    // login functionality
+    function loadUsers(){ try{return JSON.parse(localStorage.getItem('wahgnu_users')||'[]')}catch(e){return []} }
+    function saveUsers(u){ localStorage.setItem('wahgnu_users', JSON.stringify(u)) }
+    function hashPwd(p){ return btoa(p) } // simple for prototype
+
+    document.getElementById('loginBtn').addEventListener('click', ()=>{
+      const id = document.getElementById('loginId').value.trim();
+      const pwd = document.getElementById('loginPwd').value;
+      if(!id || !pwd) return alert('Identifiant et mot de passe requis.');
+      const users = loadUsers();
+      const user = users.find(u => u.email===id || u.pseudo===id);
+      if(!user || user.pwd !== hashPwd(pwd)) return alert('Identifiant ou mot de passe incorrect.');
+      localStorage.setItem('wahgnu_session', JSON.stringify({pseudo: user.pseudo, email: user.email}));
+      alert('Connexion réussie ✅');
+      window.location.href = 'index.html';
+    });
+
+    document.getElementById('signupBtn').addEventListener('click', ()=>{
+      const pseudo = document.getElementById('signupPseudo').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const pwd = document.getElementById('signupPwd').value;
+      if(!pseudo || !email || !pwd) return alert('Remplis tous les champs pour créer un compte.');
+      const users = loadUsers();
+      if(users.some(u => u.email === email)) return alert('Un compte avec cet email existe déjà.');
+      users.push({pseudo, email, pwd: hashPwd(pwd), avatar: '👤'});
+      saveUsers(users);
+      alert('Compte créé ✅ Tu peux maintenant te connecter.');
+      // Switch to login form
+      container.classList.remove("active");
+    });
+  </script>
+
+</body>
+</html>

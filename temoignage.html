@@ -1,77 +1,307 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>WAHGNU — Témoignages</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>WAKH NÜ — Témoignages</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#f4f7fa;--panel:#fff;--accent:#007bff;--muted:#6b7280}
-  body{font-family:'Poppins';margin:0;background:var(--bg);color:#07203a;transition:background .3s}
-  body.dark{--bg:#071022;--panel:rgba(255,255,255,0.03);--accent:#00b8f1;color:#e6f6ff}
-  header{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:var(--panel);box-shadow:0 2px 8px rgba(2,6,23,0.04)}
-  .logo{font-weight:800;background:linear-gradient(90deg,#0049b7,#00d9ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .wrap{max-width:980px;margin:20px auto;padding:20px}
-  .card{background:var(--panel);border-radius:12px;padding:16px;box-shadow:0 8px 30px rgba(2,6,23,0.04)}
-  .composer{display:grid;gap:12px}
-  input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:inherit}
-  .emoji-grid{display:flex;gap:8px;flex-wrap:wrap}
-  .emoji-btn{font-size:20px;padding:8px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:transparent;cursor:pointer}
-  .emoji-btn.active{outline:3px solid rgba(0,120,220,0.18)}
-  .feed{display:flex;flex-direction:column;gap:12px;margin-top:12px}
-  .post{display:flex;gap:14px;align-items:flex-start}
-  .avatar{width:54px;height:54px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(0,0,0,0.03)}
-  .post-body{flex:1}
-  .who{display:flex;gap:10px;align-items:center}
-  .meta{color:var(--muted);font-size:13px}
-  .actions{display:flex;gap:10px;margin-top:8px}
-  .small{font-size:13px;color:var(--muted)}
-  .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;border:none;cursor:pointer}
-  .like-btn.liked{opacity:0.7}
-  @media(max-width:720px){.post{flex-direction:column}.avatar{width:44px;height:44px}}
+  :root{
+    --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%); --panel: rgba(255,255,255,0.95); --accent: #ff6b6b; --text: #2d3748; --muted: #718096;
+    --glass: rgba(255,255,255,0.2); --shadow: 0 8px 32px rgba(31,38,135,0.37);
+  }
+  body{font-family:'Poppins',system-ui; margin:0; color:var(--text); background:var(--bg); background-attachment:fixed; transition:all .3s ease;}
+  body.dark{ --bg: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); --panel: rgba(255,255,255,0.05); --accent:#00d4ff; --text:#e2e8f0; --muted:#a0aec0; --glass: rgba(255,255,255,0.05); --shadow: 0 8px 32px rgba(0,0,0,0.5); }
+  header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--panel);backdrop-filter:blur(10px);box-shadow:var(--shadow);border-bottom:1px solid rgba(255,255,255,0.1)}
+  .logo{font-weight:800;font-size:40px;background:linear-gradient(45deg,#ff6b6b,#4ecdc4,#45b7d1,#96ceb4,#ffeaa7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px rgba(255,107,107,0.5);}
+  nav a{margin-left:18px;color:var(--text);text-decoration:none;font-weight:600;font-size:18px;transition:color .3s;}
+  nav a:hover{color:var(--accent)}
+  .btn{background:linear-gradient(45deg,var(--accent),#ff8e53);color:white;padding:14px 28px;border-radius:25px;border:none;cursor:pointer;font-weight:700;font-size:16px;transition:transform .3s,box-shadow .3s;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(255,107,107,0.4);}
+  .form-section{background:var(--panel);padding:40px;margin:30px auto;max-width:800px;border-radius:20px;backdrop-filter:blur(10px);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.2)}
+  label{display:block;margin-bottom:8px;color:var(--muted);font-size:16px;font-weight:600}
+  input,textarea{width:100%;padding:16px;border-radius:15px;border:1px solid rgba(255,255,255,0.3);margin-bottom:20px;font-family:'Poppins',system-ui;background:rgba(255,255,255,0.1);color:var(--text);transition:border-color .3s;}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 10px rgba(255,107,107,0.3);}
+  textarea{height:150px;resize:vertical}
+  .testimonials{max-width:800px;margin:30px auto;display:grid;gap:25px}
+  .testimonial{background:var(--panel);padding:30px;border-radius:20px;backdrop-filter:blur(10px);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.2);position:relative;overflow:hidden;animation:slideIn 0.5s ease forwards;opacity:0;transform:translateY(20px)}
+  .testimonial:nth-child(odd){animation-delay:0.1s}
+  .testimonial:nth-child(even){animation-delay:0.2s}
+  @keyframes slideIn{to{opacity:1;transform:translateY(0)}}
+  .testimonial h3{margin:0 0 10px 0;font-size:24px;color:var(--text)}
+  .testimonial p{margin:0 0 15px 0;line-height:1.6;color:var(--muted)}
+  .testimonial small{color:var(--muted);font-size:14px}
+  .testimonial .author{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-weight:600;color:var(--accent)}
+  .profile-icon{font-size:20px;}
+  .testimonial .actions{display:flex;gap:15px;margin-top:20px;justify-content:space-around}
+  .testimonial .actions button{background:linear-gradient(45deg,var(--accent),#ff8e53);color:white;border:none;padding:10px 20px;border-radius:20px;cursor:pointer;font-size:14px;font-weight:600;transition:all .3s;}
+  .testimonial .actions button:hover{transform:scale(1.05);box-shadow:0 5px 15px rgba(255,107,107,0.4);}
+  .comments{margin-top:20px;border-top:1px solid rgba(255,255,255,0.2);padding-top:20px}
+  .comment{display:flex;gap:15px;margin-bottom:15px;align-items:center}
+  .comment input{flex:1;padding:12px;border-radius:15px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:var(--text)}
+  .comment input:focus{outline:none;border-color:var(--accent)}
+  .comment button{background:linear-gradient(45deg,var(--accent),#ff8e53);color:white;border:none;padding:12px 20px;border-radius:15px;cursor:pointer;font-weight:600;transition:transform .3s;}
+  .comment button:hover{transform:translateY(-1px);}
+  .top-controls{display:flex;gap:10px;align-items:center}
+  .toggle{background:var(--glass);border:1px solid rgba(255,255,255,0.2);padding:10px 12px;border-radius:15px;cursor:pointer;backdrop-filter:blur(10px);transition:background .3s;}
+  .toggle:hover{background:rgba(255,255,255,0.3);}
+  .notification-icon{position:relative;cursor:pointer;font-size:24px;}
+  .notification-badge{position:absolute;top:-5px;right:-5px;background:red;color:white;border-radius:50%;padding:2px 6px;font-size:12px;font-weight:bold;}
+  footer{text-align:center;padding:30px;color:var(--muted);backdrop-filter:blur(10px);}
+  @media(max-width:900px){.form-section,.testimonials{margin:20px;padding:20px}.testimonial{padding:20px}.actions{flex-direction:column}}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">WAHGNU</div>
-  <div>
-    <a onclick="go('index.html')">Accueil</a> |
-    <a onclick="go('connexion.html')">Connexion</a>
-    <button id="themeBtn" style="margin-left:8px">🌓</button>
+  <div style="display:flex;align-items:center;gap:18px">
+    <div class="logo">WAKH NÜ</div>
+  </div>
+  <div class="top-controls">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="#" onclick="logout()">Déconnexion</a>
+    </nav>
+    <div class="profile-icon" onclick="go('profile.html')" style="cursor:pointer;font-size:24px;" id="profileIcon">👤</div>
+    <div class="notification-icon" onclick="showNotifications()">🔔<span class="notification-badge" id="notificationBadge" style="display:none;"></span></div>
+    <button class="toggle" id="themeToggle">🌓</button>
   </div>
 </header>
 
-<main class="wrap">
-  <div class="card">
-    <h2 id="catTitle">Témoignages — Catégorie</h2>
-    <p class="small" id="catDesc">Partage anonymement.</p>
-
-    <form id="composer" class="composer">
-      <div style="display:flex;gap:12px;align-items:center">
-        <div class="avatar" id="previewEmoji">🙂</div>
-        <input id="pseudo" placeholder="Pseudo (optionnel)" maxlength="30" />
-      </div>
-
-      <div>
-        <div class="small">Choisis un emoji</div>
-        <div class="emoji-grid" id="emojiGrid"></div>
-      </div>
-
-      <div>
-        <textarea id="message" placeholder="Écris ton témoignage..." required></textarea>
-      </div>
-
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div class="small">Publication anonyme · Respect & bienveillance</div>
-        <div style="display:flex;gap:8px">
-          <button type="button" class="btn" id="clearBtn">Effacer</button>
-          <button type="submit" class="btn">Publier</button>
-        </div>
-      </div>
+<main>
+  <section class="form-section">
+    <h2>Publier un Témoignage</h2>
+    <form id="testimonialForm">
+      <label for="title">Titre</label>
+      <input type="text" id="title" required>
+      <label for="content">Votre Témoignage</label>
+      <textarea id="content" required></textarea>
+      <button type="submit" class="btn">Publier</button>
     </form>
-  </div>
+  </section>
 
-  <div id="feed" style="margin-top:18px"></div>
+  <section class="testimonials" id="testimonialsList">
+    <!-- Testimonials will be loaded here -->
+  </section>
 </main>
 
+<footer>© 2025 WAKH NÜ — Tous droits réservés.</footer>
+
 <script>
-(function(){
+  // Theme handling
+  const themeToggle = document.getElementById('themeToggle');
+  function applyTheme(t){
+    if(t === 'dark') document.body.classList.add('dark');
+    else document.body.classList.remove('dark');
+    localStorage.setItem('wahgnu_theme', t);
+  }
+  themeToggle.addEventListener('click', ()=>{
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.background = 'rgba(0,0,0,0.5)';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '1000';
+    modal.innerHTML = `
+      <div style="background: var(--panel); padding: 20px; border-radius: 10px; text-align: center;">
+        <h3 style="margin-bottom: 20px;">Choisir un thème</h3>
+        <button id="lightMode" style="margin: 10px; padding: 10px 20px; background: #f6f8fb; color: #071127; border: none; border-radius: 5px; cursor: pointer;">Mode Nuit</button>
+        <button id="darkMode" style="margin: 10px; padding: 10px 20px; background: var(--accent); color: #001018; border: none; border-radius: 5px; cursor: pointer;">Mode Sombre</button>
+        <br><button id="closeModal" style="margin-top: 20px; padding: 5px 10px; background: transparent; color: var(--text); border: 1px solid var(--muted); border-radius: 5px; cursor: pointer;">Fermer</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    document.getElementById('lightMode').addEventListener('click', ()=>{
+      applyTheme('light');
+      themeToggle.textContent = '🌙';
+      document.body.removeChild(modal);
+    });
+    document.getElementById('darkMode').addEventListener('click', ()=>{
+      applyTheme('dark');
+      themeToggle.textContent = '☀️';
+      document.body.removeChild(modal);
+    });
+    document.getElementById('closeModal').addEventListener('click', ()=>{
+      document.body.removeChild(modal);
+    });
+  });
+  (function(){
+    const saved = localStorage.getItem('wahgnu_theme') || 'light';
+    applyTheme(saved);
+    document.body.style.opacity = 1;
+  })();
+
+  function logout(){
+    localStorage.removeItem('wahgnu_session');
+    alert('Déconnexion réussie ✅');
+  }
+
+  // Testimonials functionality
+  let testimonials = JSON.parse(localStorage.getItem('wahgnu_testimonials') || '[]');
+  let notifications = JSON.parse(localStorage.getItem('wahgnu_notifications') || '[]');
+  let users = JSON.parse(localStorage.getItem('wahgnu_users') || '[]');
+
+  function saveTestimonials(){
+    localStorage.setItem('wahgnu_testimonials', JSON.stringify(testimonials));
+  }
+
+  function saveNotifications(){
+    localStorage.setItem('wahgnu_notifications', JSON.stringify(notifications));
+  }
+
+  function ensureUsersHaveAvatars(){
+    users.forEach(user => {
+      if (!user.avatar) user.avatar = '👤';
+    });
+    localStorage.setItem('wahgnu_users', JSON.stringify(users));
+  }
+
+  function getUserAvatar(pseudo){
+    const user = users.find(u => u.pseudo === pseudo);
+    return user ? (user.avatar || '👤') : '👤';
+  }
+
+  ensureUsersHaveAvatars();
+
+  function renderTestimonials(){
+    const list = document.getElementById('testimonialsList');
+    list.innerHTML = '';
+    testimonials.forEach((t, index) => {
+      const div = document.createElement('div');
+      div.className = 'testimonial';
+      div.innerHTML = `
+        <div class="author"><span class="profile-icon">${getUserAvatar(t.author)}</span> ${t.author}</div>
+        <h3>${t.title}</h3>
+        <p>${t.content}</p>
+        <small>${new Date(t.date).toLocaleString()}</small>
+        <div class="actions">
+          <button onclick="like(${index})">👍 ${t.likes || 0}</button>
+          <button onclick="toggleComments(${index})">💬 Commentaires</button>
+          <button onclick="repost(${index})">🔄 Republier</button>
+        </div>
+        <div class="comments" id="comments-${index}" style="display:none;">
+          ${t.comments ? t.comments.map(c => `<div class="comment"><strong><span class="profile-icon">${getUserAvatar(c.author)}</span> ${c.author}:</strong> ${c.text}</div>`).join('') : ''}
+          <div class="comment">
+            <input type="text" placeholder="Ajouter un commentaire..." id="commentInput-${index}">
+            <button onclick="addComment(${index})">Envoyer</button>
+          </div>
+        </div>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  document.getElementById('testimonialForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+    const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
+    const author = session ? session.pseudo : 'Anonyme';
+    testimonials.unshift({title, content, date: new Date().toISOString(), likes: 0, comments: [], author});
+    saveTestimonials();
+    renderTestimonials();
+    document.getElementById('title').value = '';
+    document.getElementById('content').value = '';
+  });
+
+  function like(index){
+    testimonials[index].likes = (testimonials[index].likes || 0) + 1;
+    const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
+    const liker = session ? session.pseudo : 'Anonyme';
+    if (testimonials[index].author !== liker) {
+      notifications.push({to: testimonials[index].author, message: `${liker} a aimé votre post "${testimonials[index].title}"`, date: new Date().toISOString(), read: false});
+      saveNotifications();
+      updateNotificationBadge();
+    }
+    saveTestimonials();
+    renderTestimonials();
+  }
+
+  function toggleComments(index){
+    const commentsDiv = document.getElementById(`comments-${index}`);
+    commentsDiv.style.display = commentsDiv.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function addComment(index){
+    const input = document.getElementById(`commentInput-${index}`);
+    const text = input.value.trim();
+    if(text){
+      const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
+      const commenter = session ? session.pseudo : 'Anonyme';
+      testimonials[index].comments = testimonials[index].comments || [];
+      testimonials[index].comments.push({author: commenter, text});
+      if (testimonials[index].author !== commenter) {
+        notifications.push({to: testimonials[index].author, message: `${commenter} a commenté votre post "${testimonials[index].title}": "${text}"`, date: new Date().toISOString(), read: false});
+        saveNotifications();
+      }
+      saveTestimonials();
+      renderTestimonials();
+    }
+  }
+
+  function repost(index){
+    const t = testimonials[index];
+    testimonials.unshift({...t, title: 'Repost: ' + t.title, date: new Date().toISOString()});
+    saveTestimonials();
+    renderTestimonials();
+    alert('Republié !');
+  }
+
+  function updateNotificationBadge(){
+    const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
+    if (!session) return;
+    const userNotifications = notifications.filter(n => n.to === session.pseudo && !n.read);
+    const badge = document.getElementById('notificationBadge');
+    if (userNotifications.length > 0){
+      badge.textContent = userNotifications.length;
+      badge.style.display = 'inline';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+
+  function showNotifications(){
+    const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
+    if (!session) return;
+    const userNotifications = notifications.filter(n => n.to === session.pseudo);
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.background = 'rgba(0,0,0,0.5)';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '1000';
+    let content = '<div style="background: var(--panel); padding: 20px; border-radius: 10px; max-width: 500px; max-height: 70vh; overflow-y: auto;">';
+    content += '<h3>Notifications</h3>';
+    if (userNotifications.length === 0){
+      content += '<p>Aucune notification.</p>';
+    } else {
+      userNotifications.forEach((n, index) => {
+        content += `<div style="margin-bottom: 10px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); ${n.read ? '' : 'font-weight: bold;'}">${n.message}<br><small>${new Date(n.date).toLocaleString()}</small></div>`;
+        n.read = true;
+      });
+      saveNotifications();
+      updateNotificationBadge();
+    }
+    content += '<button id="closeNotifications" style="margin-top: 20px; padding: 5px 10px; background: transparent; color: var(--text); border: 1px solid var(--muted); border-radius: 5px; cursor: pointer;">Fermer</button>';
+    content += '</div>';
+    modal.innerHTML = content;
+    document.body.appendChild(modal);
+    document.getElementById('closeNotifications').addEventListener('click', () => {
+      document.body.removeChild(modal);
+    });
+  }
+
+  renderTestimonials();
+  updateNotificationBadge();
+</script>
+</body>
+</html>

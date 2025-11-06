@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
@@ -14,17 +14,32 @@
   }
   body{font-family:'Poppins',system-ui; margin:0; color:var(--text); background:var(--bg); transition:background .3s,color .3s;}
   body.dark{ --bg: #071022; --panel: rgba(255,255,255,0.03); --accent:#00b8f1; --text:#e6f6ff; --muted:#9aa6b2; --glass: rgba(255,255,255,0.03); }
-  header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--panel);box-shadow:0 2px 10px rgba(2,6,23,0.05)}
-  .logo{font-weight:800;font-size:22px;background:linear-gradient(90deg,#0049b7,#00d9ff,#000);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  nav a{margin-left:18px;color:var(--text);text-decoration:none;font-weight:600}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--panel);box-shadow:0 2px 10px rgba(2,6,23,0.05)}
+.search-center{flex:1;display:flex;justify-content:center;}
+  .logo{font-weight:800;font-size:40px;background:linear-gradient(90deg,#000,#fff,#000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 10px rgba(0,0,0,0.5);}
+  nav a{margin-left:18px;color:var(--text);text-decoration:none;font-weight:600;font-size:18px;}
   .hero{display:flex;gap:30px;align-items:center;padding:60px; background:linear-gradient(90deg, rgba(0,73,183,0.06) 0%, rgba(255,255,255,0.6) 60%); border-radius:14px; margin:24px;}
   .hero-left{flex:1}
-  .hero-left h1{font-size:36px;margin:0 0 12px 0;color:var(--text)}
-  .hero-left p{color:var(--muted);margin:0 0 18px 0}
-  .btn{background:var(--accent);color:white;padding:12px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .hero-left h1{font-size:48px;margin:0 0 12px 0;color:var(--text);text-align:center;text-shadow:0 0 15px rgba(0,0,0,0.3);}
+  .hero-left p{color:var(--muted);margin:0 0 18px 0;text-align:center;overflow:hidden;white-space:nowrap;border-right:2px solid var(--accent);animation:typing 5s steps(120,end),blink-caret .75s step-end infinite;font-size:20px;}
+  @keyframes typing{from{width:0}to{width:100%}}
+  @keyframes blink-caret{from,to{border-color:transparent}50%{border-color:var(--accent)}}
+  .btn{background:var(--accent);color:white;padding:16px 24px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:18px;}
   .categories{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:30px;margin:24px;background:var(--panel);border-radius:12px;backdrop-filter: blur(6px)}
-  .category{text-align:center;background:var(--glass);padding:18px;border-radius:12px;cursor:pointer;transition:transform .25s,box-shadow .25s}
-  .category:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,0.08)}
+  .category{text-align:center;background:var(--glass);padding:24px;border-radius:12px;cursor:pointer;transition:all .3s ease;opacity:0;transform:translateY(20px);animation:fadeInUp 0.6s ease forwards}
+  .category:nth-child(1){animation-delay:0.1s}
+  .category:nth-child(2){animation-delay:0.2s}
+  .category:nth-child(3){animation-delay:0.3s}
+  .category:nth-child(4){animation-delay:0.4s}
+  .category:nth-child(5){animation-delay:0.5s}
+  .category:nth-child(6){animation-delay:0.6s}
+  .category:nth-child(7){animation-delay:0.7s}
+  .category:nth-child(8){animation-delay:0.8s}
+  .category:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 40px rgba(2,6,23,0.15);background:linear-gradient(135deg, rgba(255,255,255,0.8), rgba(0,123,255,0.1))}
+  .category .icon{font-size:40px;margin-bottom:10px;display:block}
+  .category h3{font-size:24px;margin:0 0 8px 0;}
+  .category p{font-size:16px;color:var(--muted);}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   .postcard-wrap{display:flex;justify-content:center;padding:30px}
   .postcard{max-width:900px;background:var(--panel);border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(2,6,23,0.06);display:flex;gap:0}
   .postcard img{width:50%;object-fit:cover}
@@ -34,15 +49,7 @@
   .toggle{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:10px;cursor:pointer}
   @media(max-width:900px){.hero{flex-direction:column}.postcard{flex-direction:column}.postcard img{width:100%}}
 
-  /* Login styles */
-  .login-section { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
-  .wrap{max-width:900px;margin:40px auto;padding:20px;display:flex;gap:20px;align-items:center}
-  .left{flex:1;background:var(--panel);padding:28px;border-radius:14px;box-shadow:0 12px 40px rgba(2,6,23,0.06)}
-  .right{width:360px}
-  h1{margin:0 0 12px 0}
-  label{display:block;margin-bottom:6px;color:var(--muted);font-size:13px}
-  input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);margin-bottom:12px}
-  .small{font-size:13px;color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -50,12 +57,14 @@
   <div style="display:flex;align-items:center;gap:18px">
     <div class="logo">WAKH NÜ</div>
   </div>
+  <div class="search-center">
+    <input id="headerSearch" placeholder="Rechercher témoignages..." class="input" style="max-width:300px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background:var(--panel);color:var(--text);height:32px;" />
+  </div>
   <div class="top-controls">
     <nav>
-      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})">Accueil</a>
-      <a href="#" onclick="showLogin()">Connexion</a>
-      <a href="apropos.html" onclick="go('apropos.html')">À propos</a>
+      <a href="#" onclick="logout()">Déconnexion</a>
     </nav>
+    <div class="profile-icon" onclick="go('profile.html')" style="cursor:pointer;font-size:24px;" id="profileIcon">👤</div>
     <button class="toggle" id="themeToggle">🌓</button>
   </div>
 </header>
@@ -63,9 +72,9 @@
 <main>
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-left">
-      <h1 id="hero-title">Partage ton expérience anonymement</h1>
+      <h1 id="hero-title">DALAL AK DIAM</h1>
       <p>WAKH NÜ est un espace bienveillant où tu peux publier des témoignages anonymes : amour, famille, jeunesse, intimité, santé…</p>
-      <div style="display:flex;gap:12px">
+      <div style="display:flex;gap:12px;justify-content:center;">
         <button class="btn" onclick="showLogin()">Commencer</button>
         <button class="btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--accent);border:1px solid rgba(0,0,0,0.06)">Découvrir</button>
       </div>
@@ -74,28 +83,44 @@
 
   <section id="categories" class="categories" aria-label="Catégories">
     <div class="category" onclick="go('temoignage.html')">
+      <span class="icon">❤️</span>
       <h3>Amour</h3>
       <p style="color:var(--muted)">Récits de cœur et rencontres</p>
     </div>
     <div class="category" onclick="go('temoignage.html')">
-      <h3>Famille</h3>
-      <p style="color:var(--muted)">Histoires familiales et liens</p>
+      <span class="icon">💔</span>
+      <h3>trahison</h3>
+      <p style="color:var(--muted)"> racontez nous</p>
     </div>
     <div class="category" onclick="go('temoignage.html')">
-      <h3>Jeunesse</h3>
-      <p style="color:var(--muted)">Doutes, rêves, apprentissages</p>
+      <span class="icon">🔒</span>
+      <h3>infidélité</h3>
+      <p style="color:var(--muted)"> si ta deja vecu de l'infidelité raconte nous</p>
     </div>
     <div class="category" onclick="go('temoignage.html')">
-      <h3>Sexe</h3>
+      <span class="icon">🚫</span>
+      <h3> sujet tabou </h3>
       <p style="color:var(--muted)">Intimité et expériences</p>
     </div>
     <div class="category" onclick="go('temoignage.html')">
-      <h3>Santé</h3>
+      <span class="icon">🌱</span>
+      <h3> vecu</h3>
       <p style="color:var(--muted)">Parcours, bien-être, guérison</p>
     </div>
     <div class="category" onclick="go('temoignage.html')">
+      <span class="icon">📝</span>
       <h3>Autres</h3>
       <p style="color:var(--muted)">Autres sujets et expériences</p>
+    </div>
+    <div class="category" onclick="go('temoignage.html')">
+      <span class="icon">😔</span>
+      <h3>Ano</h3>
+      <p style="color:var(--muted)"> soulage toi et dites nous</p>
+    </div>
+    <div class="category" onclick="go('temoignage.html')">
+      <span class="icon">💡</span>
+      <h3>Conseille</h3>
+      <p style="color:var(--muted)"> on te dira notre pensees</p>
     </div>
   </section>
 
@@ -104,40 +129,6 @@
 </main>
 
 <footer>© 2025 WAKH NÜ — Tous droits réservés.</footer>
-
-<div class="login-section" id="loginSection">
-  <div class="wrap">
-    <div class="left">
-      <h1>Se connecter</h1>
-      <p class="small">Connecte-toi pour publier et gérer tes publications (système local pour le moment).</p>
-
-      <div>
-        <label>Identifiant (pseudo ou email)</label>
-        <input id="loginId" placeholder="ex : Luna42" />
-        <label>Mot de passe</label>
-        <input id="loginPwd" type="password" />
-        <div style="display:flex;gap:10px">
-          <button class="btn" id="loginBtn">Se connecter</button>
-          <button class="btn" id="toSignup" style="background:#fff;color:var(--accent);border:1px solid rgba(0,0,0,0.06)">Créer un compte</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="right">
-      <div style="background:var(--panel);padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.06)">
-        <h2 style="margin-top:0">Créer un compte</h2>
-        <label>Pseudo</label>
-        <input id="signupPseudo" />
-        <label>Email</label>
-        <input id="signupEmail" />
-        <label>Mot de passe</label>
-        <input id="signupPwd" type="password" />
-        <button class="btn" id="signupBtn" style="width:100%;margin-top:8px">Créer</button>
-        <p style="font-size:13px;color:var(--muted);margin-top:8px">Les comptes sont stockés localement (pour proto). Pour multi-utilisateurs, on ajoutera un backend.</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
   // navigation helper with fade
@@ -148,7 +139,12 @@
   }
 
   function showLogin(){
-    document.getElementById('loginSection').style.display = 'flex';
+    // Removed login functionality
+  }
+
+  function logout(){
+    localStorage.removeItem('wahgnu_session');
+    alert('Déconnexion réussie ✅');
   }
 
   // theme handling
@@ -159,8 +155,45 @@
     localStorage.setItem('wahgnu_theme', t);
   }
   themeToggle.addEventListener('click', ()=>{
-    const next = document.body.classList.contains('dark') ? 'light' : 'dark';
-    applyTheme(next);
+    // Show modal with options
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.background = 'rgba(0,0,0,0.5)';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '1000';
+
+    modal.innerHTML = `
+      <div style="background: var(--panel); padding: 20px; border-radius: 10px; text-align: center;">
+        <h3 style="margin-bottom: 20px;">Choisir un thème</h3>
+        <button id="lightMode" style="margin: 10px; padding: 10px 20px; background: #f6f8fb; color: #071127; border: none; border-radius: 5px; cursor: pointer;">Mode Nuit</button>
+        <button id="darkMode" style="margin: 10px; padding: 10px 20px; background: var(--accent); color: #001018; border: none; border-radius: 5px; cursor: pointer;">Mode Sombre</button>
+        <br><button id="closeModal" style="margin-top: 20px; padding: 5px 10px; background: transparent; color: var(--text); border: 1px solid var(--muted); border-radius: 5px; cursor: pointer;">Fermer</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById('lightMode').addEventListener('click', ()=>{
+      applyTheme('light');
+      themeToggle.textContent = '🌙';
+      document.body.removeChild(modal);
+    });
+
+    document.getElementById('darkMode').addEventListener('click', ()=>{
+      applyTheme('dark');
+      themeToggle.textContent = '☀️';
+      document.body.removeChild(modal);
+    });
+
+    document.getElementById('closeModal').addEventListener('click', ()=>{
+      document.body.removeChild(modal);
+    });
   });
   // init
   (function(){
@@ -169,36 +202,43 @@
     document.body.style.opacity = 1;
   })();
 
-  // login functionality
-  function loadUsers(){ try{return JSON.parse(localStorage.getItem('wahgnu_users')||'[]')}catch(e){return []} }
-  function saveUsers(u){ localStorage.setItem('wahgnu_users', JSON.stringify(u)) }
-  function hashPwd(p){ return btoa(p) } // simple for prototype
-
-  document.getElementById('signupBtn').addEventListener('click', ()=>{
-    const pseudo = document.getElementById('signupPseudo').value.trim();
-    const email = document.getElementById('signupEmail').value.trim();
-    const pwd = document.getElementById('signupPwd').value;
-    if(!pseudo || !email || !pwd) return alert('Remplis tous les champs pour créer un compte.');
-    const users = loadUsers();
-    if(users.some(u => u.email === email)) return alert('Un compte avec cet email existe déjà.');
-    users.push({pseudo, email, pwd: hashPwd(pwd)});
-    saveUsers(users);
-    alert('Compte créé ✅ Tu peux maintenant te connecter.');
-    document.getElementById('signupPseudo').value=''; document.getElementById('signupEmail').value=''; document.getElementById('signupPwd').value='';
+  // search functionality
+  document.getElementById('headerSearch').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      const query = event.target.value.trim();
+      if (query) {
+        alert('Recherche pour: ' + query);
+        // TODO: Implement actual search logic
+      }
+    }
   });
 
-  document.getElementById('loginBtn').addEventListener('click', ()=>{
-    const id = document.getElementById('loginId').value.trim();
-    const pwd = document.getElementById('loginPwd').value;
-    if(!id || !pwd) return alert('Identifiant et mot de passe requis.');
-    const users = loadUsers();
-    const user = users.find(u => u.email===id || u.pseudo===id);
-    if(!user || user.pwd !== hashPwd(pwd)) return alert('Identifiant ou mot de passe incorrect.');
-    localStorage.setItem('wahgnu_session', JSON.stringify({pseudo: user.pseudo, email: user.email}));
-    alert('Connexion réussie ✅');
-    document.getElementById('loginSection').style.display = 'none';
-    document.getElementById('loginId').value=''; document.getElementById('loginPwd').value='';
-  });
+  // Users functionality
+  let users = JSON.parse(localStorage.getItem('wahgnu_users') || '[]');
+
+  function ensureUsersHaveAvatars(){
+    users.forEach(user => {
+      if (!user.avatar) user.avatar = '👤';
+    });
+    localStorage.setItem('wahgnu_users', JSON.stringify(users));
+  }
+
+  function getUserAvatar(pseudo){
+    const user = users.find(u => u.pseudo === pseudo);
+    return user ? (user.avatar || '👤') : '👤';
+  }
+
+  function updateProfileIcon(){
+    const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
+    const profileIcon = document.getElementById('profileIcon');
+    if (session && profileIcon) {
+      profileIcon.textContent = getUserAvatar(session.pseudo);
+    }
+  }
+
+  ensureUsersHaveAvatars();
+  updateProfileIcon();
+
 </script>
 </body>
 </html>
