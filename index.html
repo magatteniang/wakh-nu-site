@@ -3,242 +3,331 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%23C8553D'/%3E%3Cg%20transform='translate(13%2012)%20scale(.74)'%3E%3Cpath%20d='M30%208H70A22%2022%200%200%201%2092%2030V54A22%2022%200%200%201%2070%2076H52L26%2095L30%2076A22%2022%200%200%201%208%2054V30A22%2022%200%200%201%2030%208Z'%20fill='%23FBF6EF'/%3E%3Cpath%20d='M50%2062C50%2062%2030%2049%2030%2036C30%2028%2036%2023%2042%2023C46%2023%2049%2025%2050%2028C51%2025%2054%2023%2058%2023C64%2023%2070%2028%2070%2036C70%2049%2050%2062%2050%2062Z'%20fill='%23C8553D'/%3E%3C/g%3E%3C/svg%3E" />
 <meta name="google-site-verification" content="KcO625QL7dNJK4P6xTKs4-k3ptkDCozJLCHuAfODI5o" />
 <meta name="google-site-verification" content="zLDFMWXUW6tfHb7OzV4u8JIs7IfP5B44EAB1KTz3sss" />
-<title>WAKH NÜ — Accueil</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>WAKH NÜ — Témoignages anonymes et bienveillants</title>
+<meta name="description" content="WAKH NÜ est un espace bienveillant pour partager des témoignages anonymes : amour, famille, jeunesse, intimité, santé…" />
+<meta name="theme-color" content="#c8553d" />
+<meta property="og:title" content="WAKH NÜ — Dalal ak diam" />
+<meta property="og:description" content="Un espace bienveillant pour publier des témoignages anonymes." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f0f4f8; --panel:#ffffff; --accent:#007bff; --text:#07203a; --muted:#6b7280;
-    --glass: rgba(255,255,255,0.7);
+    --bg:#fbf6ef;
+    --bg-alt:#f4ebdf;
+    --panel:#ffffff;
+    --text:#2a1f1a;
+    --muted:#6f625a;
+    --accent:#c8553d;
+    --accent-dark:#a8412c;
+    --accent-soft:#f6ded6;
+    --green:#2f6f5e;
+    --border:rgba(42,31,26,.10);
+    --shadow:0 12px 40px rgba(60,35,20,.10);
+    --radius:20px;
   }
-  body{font-family:'Poppins',system-ui; margin:0; color:var(--text); background:var(--bg); transition:background .3s,color .3s;}
-  body.dark{ --bg: #071022; --panel: rgba(255,255,255,0.03); --accent:#00b8f1; --text:#e6f6ff; --muted:#9aa6b2; --glass: rgba(255,255,255,0.03); }
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--panel);box-shadow:0 2px 10px rgba(2,6,23,0.05)}
-.search-center{flex:1;display:flex;justify-content:center;}
-  .logo{font-weight:800;font-size:40px;background:linear-gradient(90deg,#000,#fff,#000);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 10px rgba(0,0,0,0.5);}
-  nav a{margin-left:18px;color:var(--text);text-decoration:none;font-weight:600;font-size:18px;}
-  .hero{display:flex;gap:30px;align-items:center;padding:60px; background:linear-gradient(90deg, rgba(0,73,183,0.06) 0%, rgba(255,255,255,0.6) 60%); border-radius:14px; margin:24px;}
-  .hero-left{flex:1}
-  .hero-left h1{font-size:48px;margin:0 0 12px 0;color:var(--text);text-align:center;text-shadow:0 0 15px rgba(0,0,0,0.3);}
-  .hero-left p{color:var(--muted);margin:0 0 18px 0;text-align:center;overflow:hidden;white-space:nowrap;border-right:2px solid var(--accent);animation:typing 5s steps(120,end),blink-caret .75s step-end infinite;font-size:20px;}
-  @keyframes typing{from{width:0}to{width:100%}}
-  @keyframes blink-caret{from,to{border-color:transparent}50%{border-color:var(--accent)}}
-  .btn{background:var(--accent);color:white;padding:16px 24px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:18px;}
-  .categories{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:30px;margin:24px;background:var(--panel);border-radius:12px;backdrop-filter: blur(6px)}
-  .category{text-align:center;background:var(--glass);padding:24px;border-radius:12px;cursor:pointer;transition:all .3s ease;opacity:0;transform:translateY(20px);animation:fadeInUp 0.6s ease forwards}
-  .category:nth-child(1){animation-delay:0.1s}
-  .category:nth-child(2){animation-delay:0.2s}
-  .category:nth-child(3){animation-delay:0.3s}
-  .category:nth-child(4){animation-delay:0.4s}
-  .category:nth-child(5){animation-delay:0.5s}
-  .category:nth-child(6){animation-delay:0.6s}
-  .category:nth-child(7){animation-delay:0.7s}
-  .category:nth-child(8){animation-delay:0.8s}
-  .category:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 40px rgba(2,6,23,0.15);background:linear-gradient(135deg, rgba(255,255,255,0.8), rgba(0,123,255,0.1))}
-  .category .icon{font-size:40px;margin-bottom:10px;display:block}
-  .category h3{font-size:24px;margin:0 0 8px 0;}
-  .category p{font-size:16px;color:var(--muted);}
-  @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  .postcard-wrap{display:flex;justify-content:center;padding:30px}
-  .postcard{max-width:900px;background:var(--panel);border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(2,6,23,0.06);display:flex;gap:0}
-  .postcard img{width:50%;object-fit:cover}
-  .postcard .text{padding:24px;flex:1}
-  footer{text-align:center;padding:18px;color:var(--muted)}
-  .top-controls{display:flex;gap:10px;align-items:center}
-  .toggle{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:10px;cursor:pointer}
-  @media(max-width:900px){.hero{flex-direction:column}.postcard{flex-direction:column}.postcard img{width:100%}}
+  :root[data-theme="dark"]{
+    --bg:#15110f;
+    --bg-alt:#1d1815;
+    --panel:#221c19;
+    --text:#f6ede4;
+    --muted:#b3a498;
+    --accent:#e8765d;
+    --accent-dark:#f08a73;
+    --accent-soft:#3a2520;
+    --green:#6fc2a9;
+    --border:rgba(255,255,255,.09);
+    --shadow:0 12px 40px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:'Poppins',system-ui,sans-serif;color:var(--text);background:var(--bg);
+    line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;
+  }
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15;margin:0}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+  .container{width:min(1100px,100% - 40px);margin-inline:auto}
 
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:24px;text-decoration:none;letter-spacing:.5px}
+  .logo span{color:var(--accent)}
+  .logo{display:inline-flex;align-items:center;gap:10px}
+  .logo .wm{color:var(--text)}
+  .logo .wm span{color:var(--accent)}
+  .logo .mb{fill:var(--accent)}
+  .logo .mh{fill:var(--bg)}
+  .nav-right{display:flex;align-items:center;gap:6px}
+  .nav-links{display:flex;gap:4px;margin-right:10px}
+  .nav-links a{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px;color:var(--muted);transition:.2s}
+  .nav-links a:hover{background:var(--accent-soft);color:var(--accent-dark)}
+  .icon-btn{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--border);
+    background:var(--panel);cursor:pointer;font-size:18px;display:grid;place-items:center;color:var(--text);
+  }
 
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;
+    font:600 16px 'Poppins',sans-serif;text-decoration:none;cursor:pointer;border:2px solid transparent;transition:.2s;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 40%,transparent)}
+  .btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent-dark)}
+  .btn-sm{padding:9px 20px;font-size:14px;margin-right:4px}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;padding:90px 0 100px}
+  .hero::before,.hero::after{
+    content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0;
+  }
+  .hero::before{width:420px;height:420px;background:var(--accent-soft);top:-120px;right:-80px}
+  .hero::after{width:340px;height:340px;background:color-mix(in srgb,var(--green) 22%,transparent);bottom:-140px;left:-100px}
+  .hero .container{position:relative;z-index:1;max-width:820px;text-align:center}
+  .badge{
+    display:inline-block;padding:7px 16px;border-radius:999px;background:var(--accent-soft);
+    color:var(--accent-dark);font-weight:600;font-size:13px;letter-spacing:1.5px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(40px,7vw,72px);margin-bottom:20px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:640px;margin:0 auto 34px}
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .hero-note{margin-top:22px;font-size:14px;color:var(--muted)}
+
+  /* Sections */
+  section{padding:80px 0}
+  .alt{background:var(--bg-alt)}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 48px}
+  .section-head h2{font-size:clamp(30px,4.5vw,44px);margin-bottom:12px}
+  .section-head p{color:var(--muted);margin:0}
+
+  /* Categories */
+  .grid{display:grid;gap:20px}
+  .cats{grid-template-columns:repeat(4,1fr)}
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px 22px;transition:transform .25s,box-shadow .25s,border-color .25s;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--accent)}
+  a.card{display:block;text-decoration:none;color:inherit}
+  .card .emoji{
+    width:54px;height:54px;border-radius:16px;background:var(--accent-soft);display:grid;place-items:center;
+    font-size:26px;margin-bottom:16px;
+  }
+  .card h3{font-size:21px;margin-bottom:6px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+
+  /* Steps */
+  .steps{grid-template-columns:repeat(3,1fr);counter-reset:step}
+  .step{position:relative;padding:30px 26px;background:var(--panel);border-radius:var(--radius);border:1px solid var(--border)}
+  .step::before{
+    counter-increment:step;content:counter(step);
+    display:grid;place-items:center;width:44px;height:44px;border-radius:50%;
+    background:var(--accent);color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:20px;margin-bottom:16px;
+  }
+  .step h3{font-size:21px;margin-bottom:8px}
+  .step p{margin:0;color:var(--muted);font-size:15px}
+
+  /* Values */
+  .values{grid-template-columns:repeat(3,1fr)}
+  .value{text-align:center;padding:10px 18px}
+  .value .emoji{font-size:38px;margin-bottom:10px}
+  .value h3{font-size:20px;margin-bottom:6px}
+  .value p{margin:0;color:var(--muted);font-size:15px}
+
+  /* About */
+  .about{max-width:760px;margin:0 auto;text-align:center}
+  .about h2{font-size:clamp(30px,4.5vw,44px);margin-bottom:18px}
+  .about p{color:var(--muted);font-size:17px}
+  .wolof{
+    margin:28px auto 0;display:inline-block;padding:14px 26px;border-radius:var(--radius);
+    background:var(--accent-soft);color:var(--accent-dark);font-family:'Fraunces',serif;font-size:22px;font-weight:600;
+  }
+
+  /* CTA */
+  .cta{
+    text-align:center;padding:60px 30px;border-radius:32px;
+    background:linear-gradient(135deg,var(--accent),#e08a55);color:#fff;
+  }
+  .cta h2{font-size:clamp(28px,4vw,40px);margin-bottom:12px}
+  .cta p{margin:0 auto 26px;max-width:540px;opacity:.95}
+  .cta .btn{background:#fff;color:var(--accent-dark)}
+  .cta .btn:hover{transform:translateY(-2px)}
+
+  footer{padding:36px 0;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+  .reveal.visible{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .card,.btn{transition:none}
+  }
+
+  /* Responsive */
+  @media(max-width:960px){.cats{grid-template-columns:repeat(2,1fr)}.steps,.values{grid-template-columns:1fr}}
+  @media(max-width:640px){
+    .nav-links{display:none}
+    .hero{padding:60px 0 70px}
+    section{padding:60px 0}
+    .cats{grid-template-columns:1fr 1fr;gap:14px}
+    .card{padding:20px 16px}
+    .btn{padding:13px 22px}
+  }
+  @media(max-width:380px){.cats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
 <header>
-  <div style="display:flex;align-items:center;gap:18px">
-    <div class="logo">WAKH NÜ</div>
-  </div>
-  <div class="search-center">
-    <input id="headerSearch" placeholder="Rechercher témoignages..." class="input" style="max-width:300px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);background:var(--panel);color:var(--text);height:32px;" />
-  </div>
-  <div class="top-controls">
-    <nav>
-      <a href="#" onclick="logout()">Déconnexion</a>
-    </nav>
-    <div class="profile-icon" onclick="go('profile.html')" style="cursor:pointer;font-size:24px;" id="profileIcon">👤</div>
-    <button class="toggle" id="themeToggle">🌓</button>
+  <div class="container nav">
+    <a href="#accueil" class="logo" aria-label="WAKH NÜ, retour en haut"><svg viewBox="0 0 100 100" width="34" height="34" aria-hidden="true"><path class="mb" d="M30 8H70A22 22 0 0 1 92 30V54A22 22 0 0 1 70 76H52L26 95L30 76A22 22 0 0 1 8 54V30A22 22 0 0 1 30 8Z"/><path class="mh" d="M50 62C50 62 30 49 30 36C30 28 36 23 42 23C46 23 49 25 50 28C51 25 54 23 58 23C64 23 70 28 70 36C70 49 50 62 50 62Z"/></svg><span class="wm">WAKH <span>NÜ</span></span></a>
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#categories">Thèmes</a>
+        <a href="temoignage.html">Témoignages</a>
+        <a href="#comment">Comment ça marche</a>
+        <a href="#apropos">À propos</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="connexion.html">Connexion</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Changer de thème clair/sombre" title="Thème clair / sombre">🌓</button>
+    </div>
   </div>
 </header>
 
-<main>
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-left">
-      <h1 id="hero-title">DALAL AK DIAM</h1>
-      <p>WAKH NÜ est un espace bienveillant où tu peux publier des témoignages anonymes : amour, famille, jeunesse, intimité, santé…</p>
-      <div style="display:flex;gap:12px;justify-content:center;">
-        <button class="btn" onclick="showLogin()">Commencer</button>
-        <button class="btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})" style="background:#fff;color:var(--accent);border:1px solid rgba(0,0,0,0.06)">Découvrir</button>
+<main id="accueil">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
+      <span class="badge">DALAL AK DIAM</span>
+      <h1>Dis-le <em>sans te cacher</em>, on t’écoute.</h1>
+      <p class="lead">WAKH NÜ est un espace bienveillant où tu peux publier des témoignages anonymes : amour, famille, jeunesse, intimité, santé…</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="temoignage.html">Commencer</a>
+        <a class="btn btn-ghost" href="#categories">Découvrir les thèmes</a>
+      </div>
+      <p class="hero-note">🔒 Anonyme · 🤝 Sans jugement · 🌱 Fait pour t’aider</p>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section id="categories" class="alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Choisis ton thème</h2>
+        <p>Chaque histoire a sa place. Trouve l’espace qui te ressemble.</p>
+      </div>
+      <div class="grid cats">
+        <a class="card reveal" href="temoignage.html"><div class="emoji">❤️</div><h3>Amour</h3><p>Récits de cœur et rencontres.</p></a>
+        <a class="card reveal" href="temoignage.html"><div class="emoji">💔</div><h3>Trahison</h3><p>Raconte-nous ce qui t’a blessé.</p></a>
+        <a class="card reveal" href="temoignage.html"><div class="emoji">🔒</div><h3>Infidélité</h3><p>Tu as déjà vécu de l’infidélité ? Raconte-nous.</p></a>
+        <a class="card reveal" href="temoignage.html"><div class="emoji">🚫</div><h3>Sujets tabous</h3><p>Intimité et expériences dont on parle peu.</p></a>
+        <a class="card reveal" href="temoignage.html"><div class="emoji">🌱</div><h3>Vécu</h3><p>Parcours, bien-être, guérison.</p></a>
+        <a class="card reveal" href="temoignage.html"><div class="emoji">😔</div><h3>Se confier</h3><p>Soulage-toi, dis-nous ce que tu as sur le cœur.</p></a>
+        <a class="card reveal" href="temoignage.html"><div class="emoji">💡</div><h3>Conseils</h3><p>On te dira ce qu’on en pense.</p></a>
+        <a class="card reveal" href="temoignage.html"><div class="emoji">📝</div><h3>Autres</h3><p>Tous les autres sujets et expériences.</p></a>
       </div>
     </div>
   </section>
 
-  <section id="categories" class="categories" aria-label="Catégories">
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">❤️</span>
-      <h3>Amour</h3>
-      <p style="color:var(--muted)">Récits de cœur et rencontres</p>
-    </div>
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">💔</span>
-      <h3>trahison</h3>
-      <p style="color:var(--muted)"> racontez nous</p>
-    </div>
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">🔒</span>
-      <h3>infidélité</h3>
-      <p style="color:var(--muted)"> si ta deja vecu de l'infidelité raconte nous</p>
-    </div>
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">🚫</span>
-      <h3> sujet tabou </h3>
-      <p style="color:var(--muted)">Intimité et expériences</p>
-    </div>
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">🌱</span>
-      <h3> vecu</h3>
-      <p style="color:var(--muted)">Parcours, bien-être, guérison</p>
-    </div>
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">📝</span>
-      <h3>Autres</h3>
-      <p style="color:var(--muted)">Autres sujets et expériences</p>
-    </div>
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">😔</span>
-      <h3>Ano</h3>
-      <p style="color:var(--muted)"> soulage toi et dites nous</p>
-    </div>
-    <div class="category" onclick="go('temoignage.html')">
-      <span class="icon">💡</span>
-      <h3>Conseille</h3>
-      <p style="color:var(--muted)"> on te dira notre pensees</p>
+  <!-- HOW IT WORKS -->
+  <section id="comment">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Comment ça marche</h2>
+        <p>Trois étapes simples, sans te dévoiler.</p>
+      </div>
+      <div class="grid steps">
+        <div class="step reveal"><h3>Choisis un thème</h3><p>Amour, famille, santé… sélectionne l’espace qui correspond à ton histoire.</p></div>
+        <div class="step reveal"><h3>Écris librement</h3><p>Raconte avec tes mots, sans donner ton nom. Ton histoire, à ton rythme.</p></div>
+        <div class="step reveal"><h3>Sois lu et soutenu</h3><p>D’autres personnes te lisent, réagissent avec bienveillance et te donnent leur avis.</p></div>
+      </div>
     </div>
   </section>
 
+  <!-- VALUES -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Nos valeurs</h2>
+      </div>
+      <div class="grid values">
+        <div class="value reveal"><div class="emoji">🕊️</div><h3>Bienveillance</h3><p>Ici, on écoute sans juger et on respecte chaque histoire.</p></div>
+        <div class="value reveal"><div class="emoji">🎭</div><h3>Anonymat</h3><p>Tu parles librement, sans que personne sache qui tu es.</p></div>
+        <div class="value reveal"><div class="emoji">🤲</div><h3>Entraide</h3><p>Partager, c’est déjà alléger. Ensemble, on avance.</p></div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ABOUT -->
+  <section id="apropos">
+    <div class="container about reveal">
+      <h2>À propos</h2>
+      <p>« Wakh nû » signifie « parlons » en wolof. Ce site est né d’une idée simple : offrir un endroit où l’on peut parler de ce qui compte vraiment, y compris des sujets que l’on n’ose pas aborder autour de soi.</p>
+      <div class="wolof">Dalal ak diam</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="cta reveal">
+        <h2>Prêt à parler ?</h2>
+        <p>Partage ton histoire ou lis celles des autres, en toute discrétion.</p>
+        <a class="btn" href="temoignage.html">Publier un témoignage</a>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<footer>© 2025 WAKH NÜ — Tous droits réservés.</footer>
+<footer>
+  <div class="container">© <span id="year">2026</span> WAKH NÜ — Tous droits réservés.</div>
+</footer>
 
 <script>
-  // navigation helper with fade
-  function go(url){
-    document.body.style.transition = 'opacity .45s';
-    document.body.style.opacity = 0;
-    setTimeout(()=> window.location.href = url, 420);
-  }
-
-  function showLogin(){
-    // Removed login functionality
-  }
-
-  function logout(){
-    localStorage.removeItem('wahgnu_session');
-    alert('Déconnexion réussie ✅');
-  }
-
-  // theme handling
-  const themeToggle = document.getElementById('themeToggle');
-  function applyTheme(t){
-    if(t === 'dark') document.body.classList.add('dark');
-    else document.body.classList.remove('dark');
-    localStorage.setItem('wahgnu_theme', t);
-  }
-  themeToggle.addEventListener('click', ()=>{
-    // Show modal with options
-    const modal = document.createElement('div');
-    modal.style.position = 'fixed';
-    modal.style.top = '0';
-    modal.style.left = '0';
-    modal.style.width = '100%';
-    modal.style.height = '100%';
-    modal.style.background = 'rgba(0,0,0,0.5)';
-    modal.style.display = 'flex';
-    modal.style.alignItems = 'center';
-    modal.style.justifyContent = 'center';
-    modal.style.zIndex = '1000';
-
-    modal.innerHTML = `
-      <div style="background: var(--panel); padding: 20px; border-radius: 10px; text-align: center;">
-        <h3 style="margin-bottom: 20px;">Choisir un thème</h3>
-        <button id="lightMode" style="margin: 10px; padding: 10px 20px; background: #f6f8fb; color: #071127; border: none; border-radius: 5px; cursor: pointer;">Mode Nuit</button>
-        <button id="darkMode" style="margin: 10px; padding: 10px 20px; background: var(--accent); color: #001018; border: none; border-radius: 5px; cursor: pointer;">Mode Sombre</button>
-        <br><button id="closeModal" style="margin-top: 20px; padding: 5px 10px; background: transparent; color: var(--text); border: 1px solid var(--muted); border-radius: 5px; cursor: pointer;">Fermer</button>
-      </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    document.getElementById('lightMode').addEventListener('click', ()=>{
-      applyTheme('light');
-      themeToggle.textContent = '🌙';
-      document.body.removeChild(modal);
-    });
-
-    document.getElementById('darkMode').addEventListener('click', ()=>{
-      applyTheme('dark');
-      themeToggle.textContent = '☀️';
-      document.body.removeChild(modal);
-    });
-
-    document.getElementById('closeModal').addEventListener('click', ()=>{
-      document.body.removeChild(modal);
-    });
-  });
-  // init
+  // Thème clair / sombre
   (function(){
-    const saved = localStorage.getItem('wahgnu_theme') || 'light';
-    applyTheme(saved);
-    document.body.style.opacity = 1;
+    var root = document.documentElement, btn = document.getElementById('themeToggle');
+    var saved = null;
+    try { saved = localStorage.getItem('wakhnu_theme'); } catch(e){}
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('wakhnu_theme', next); } catch(e){}
+    });
   })();
 
-  // search functionality
-  document.getElementById('headerSearch').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      const query = event.target.value.trim();
-      if (query) {
-        alert('Recherche pour: ' + query);
-        // TODO: Implement actual search logic
-      }
-    }
-  });
+  // Année du pied de page
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Users functionality
-  let users = JSON.parse(localStorage.getItem('wahgnu_users') || '[]');
-
-  function ensureUsersHaveAvatars(){
-    users.forEach(user => {
-      if (!user.avatar) user.avatar = '👤';
-    });
-    localStorage.setItem('wahgnu_users', JSON.stringify(users));
-  }
-
-  function getUserAvatar(pseudo){
-    const user = users.find(u => u.pseudo === pseudo);
-    return user ? (user.avatar || '👤') : '👤';
-  }
-
-  function updateProfileIcon(){
-    const session = JSON.parse(localStorage.getItem('wahgnu_session') || 'null');
-    const profileIcon = document.getElementById('profileIcon');
-    if (session && profileIcon) {
-      profileIcon.textContent = getUserAvatar(session.pseudo);
-    }
-  }
-
-  ensureUsersHaveAvatars();
-  updateProfileIcon();
-
+  // Apparition douce au défilement
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('visible')}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12});
+    els.forEach(function(e){ io.observe(e); });
+  })();
 </script>
 </body>
 </html>
