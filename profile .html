@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%23C8553D'/%3E%3Cg%20transform='translate(13%2012)%20scale(.74)'%3E%3Cpath%20d='M30%208H70A22%2022%200%200%201%2092%2030V54A22%2022%200%200%201%2070%2076H52L26%2095L30%2076A22%2022%200%200%201%208%2054V30A22%2022%200%200%201%2030%208Z'%20fill='%23FBF6EF'/%3E%3Cpath%20d='M50%2062C50%2062%2030%2049%2030%2036C30%2028%2036%2023%2042%2023C46%2023%2049%2025%2050%2028C51%2025%2054%2023%2058%2023C64%2023%2070%2028%2070%2036C70%2049%2050%2062%2050%2062Z'%20fill='%23C8553D'/%3E%3C/g%3E%3C/svg%3E" />
+<title>Mon profil — WAKH NÜ</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf6ef; --bg-alt:#f4ebdf; --panel:#ffffff; --text:#2a1f1a; --muted:#6f625a;
+    --accent:#c8553d; --accent-dark:#a8412c; --accent-soft:#f6ded6; --green:#2f6f5e;
+    --border:rgba(42,31,26,.12); --shadow:0 12px 40px rgba(60,35,20,.12);
+  }
+  :root[data-theme="dark"]{
+    --bg:#15110f; --bg-alt:#1d1815; --panel:#221c19; --text:#f6ede4; --muted:#b3a498;
+    --accent:#e8765d; --accent-dark:#f08a73; --accent-soft:#3a2520; --green:#6fc2a9;
+    --border:rgba(255,255,255,.12); --shadow:0 12px 40px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;min-height:100vh;display:flex;flex-direction:column;
+    font-family:'Poppins',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;
+    transition:background .3s,color .3s;
+  }
+  h1{font-family:'Fraunces',Georgia,serif;margin:0;line-height:1.15}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 24px}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:24px;text-decoration:none}
+  .logo span{color:var(--accent)}
+  .logo{display:inline-flex;align-items:center;gap:10px}
+  .logo .wm{color:var(--text)}
+  .logo .wm span{color:var(--accent)}
+  .logo .mb{fill:var(--accent)}
+  .logo .mh{fill:var(--bg)}
+  .icon-btn{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--panel);
+    cursor:pointer;font-size:18px;display:grid;place-items:center;color:var(--text);
+  }
+
+  main{flex:1;display:grid;place-items:center;padding:20px}
+  .box{
+    width:min(620px,100%);background:var(--panel);border:1px solid var(--border);
+    border-radius:28px;box-shadow:var(--shadow);padding:34px 30px;text-align:center;
+  }
+  .box h1{font-size:32px;margin-bottom:4px}
+  .pseudo{color:var(--muted);font-size:15px;margin:0 0 20px}
+  .current{
+    width:110px;height:110px;margin:0 auto 22px;border-radius:50%;background:var(--accent-soft);
+    display:grid;place-items:center;font-size:56px;border:3px solid var(--accent);
+  }
+  .picker-title{font-size:14px;color:var(--muted);margin-bottom:10px}
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:8px;
+    max-height:290px;overflow-y:auto;padding:6px;border-radius:18px;background:var(--bg);border:1px solid var(--border);
+  }
+  .opt{
+    font-size:28px;line-height:1;padding:10px 0;border-radius:14px;border:2px solid transparent;
+    background:transparent;cursor:pointer;transition:background .2s,transform .2s;
+  }
+  .opt:hover{background:var(--accent-soft);transform:scale(1.08)}
+  .opt[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+
+  .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+  .btn{
+    padding:13px 28px;border-radius:999px;border:2px solid transparent;cursor:pointer;
+    font:600 16px 'Poppins',sans-serif;transition:.2s;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 35%,transparent)}
+  .btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent-dark)}
+  .msg{min-height:22px;margin-top:16px;font-size:14px;font-weight:500;color:var(--green)}
+  .back{display:block;margin-top:14px;color:var(--muted);font-size:14px}
+  @media (prefers-reduced-motion:reduce){.opt,.btn{transition:none}}
+  @media (max-width:420px){.box{padding:26px 16px}}
+  .toplink{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px;color:var(--muted)}
+  .toplink:hover{background:var(--accent-soft);color:var(--accent-dark)}
+  @media (max-width:560px){.toplink{display:none}.top{padding:14px 16px}}
+
+  /* Logo animé */
+  .logo svg{overflow:visible;flex:none}
+  .logo .mb{transform-box:fill-box;transform-origin:50% 90%;animation:lgIn .7s cubic-bezier(.2,1.4,.4,1) both}
+  .logo .mh{transform-box:fill-box;transform-origin:center;animation:lgPop .6s .3s cubic-bezier(.2,1.7,.4,1) both,lgBeat 2.6s 1.4s ease-in-out infinite}
+  .logo:hover svg{animation:lgWiggle .7s ease}
+  @keyframes lgIn{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+  @keyframes lgPop{from{transform:scale(0)}to{transform:scale(1)}}
+  @keyframes lgBeat{0%,50%,100%{transform:scale(1)}12%{transform:scale(1.2)}24%{transform:scale(1)}36%{transform:scale(1.12)}}
+  @keyframes lgWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}50%{transform:rotate(7deg)}75%{transform:rotate(-4deg)}}
+  @media (prefers-reduced-motion:reduce){.logo .mb,.logo .mh,.logo:hover svg{animation:none}}
+  /* Fond doux */
+  body{background-image:radial-gradient(700px 320px at 92% -4%,var(--accent-soft),transparent 70%);background-repeat:no-repeat}
+  /* Barre de navigation mobile */
+  .tabbar{display:none}
+  @media (max-width:640px){
+    body{padding-bottom:78px}
+    .tabbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;
+      background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border-top:1px solid var(--border);padding:6px 10px calc(6px + env(safe-area-inset-bottom));gap:6px}
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 4px;border-radius:14px;
+      text-decoration:none;font:500 11px 'Poppins',sans-serif;color:var(--muted)}
+    .tabbar svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .tabbar a[aria-current="page"]{color:var(--accent-dark);background:var(--accent-soft)}
+  }
+  .current{overflow:hidden}
+  .current img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+  .hint{font-size:13px;color:var(--muted);margin:0 0 22px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="logo" href="index.html" aria-label="WAKH NÜ, retour à l'accueil"><svg viewBox="0 0 100 100" width="34" height="34" aria-hidden="true"><path class="mb" d="M30 8H70A22 22 0 0 1 92 30V54A22 22 0 0 1 70 76H52L26 95L30 76A22 22 0 0 1 8 54V30A22 22 0 0 1 30 8Z"/><path class="mh" d="M50 62C50 62 30 49 30 36C30 28 36 23 42 23C46 23 49 25 50 28C51 25 54 23 58 23C64 23 70 28 70 36C70 49 50 62 50 62Z"/></svg><span class="wm">WAKH <span>NÜ</span></span></a>
+  <div style="display:flex;align-items:center;gap:6px"><a href="index.html" class="toplink">Accueil</a><a href="temoignage.html" class="toplink">Témoignages</a><button class="icon-btn" id="themeToggle" aria-label="Changer de thème clair/sombre" title="Thème clair / sombre">🌓</button></div>
+</div>
+
+<main>
+  <div class="box">
+    <h1>Mon profil</h1>
+    <p class="pseudo" id="pseudo"></p>
+    <div class="current" id="currentAvatar" aria-live="polite">👤</div>
+
+    <div class="photo-actions">
+      <button type="button" class="btn btn-primary" id="photoBtn">📷 Choisir une photo de ma galerie</button>
+      <button type="button" class="btn btn-ghost" id="photoRemove" style="display:none">Retirer la photo</button>
+      <input type="file" id="photoInput" accept="image/*" hidden />
+    </div>
+    <p class="hint">Ta photo reste sur cet appareil. Pour rester anonyme, choisis plutôt une image où l’on ne te reconnaît pas.</p>
+
+    <div class="picker-title" id="pickerTitle">Ou choisis un avatar</div>
+    <div class="grid" id="avatarSelector" role="group" aria-labelledby="pickerTitle"></div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="saveBtn">Enregistrer</button>
+      <button class="btn btn-ghost" id="cancelBtn">Annuler</button>
+      <button class="btn btn-ghost" id="logoutBtn">Se déconnecter</button>
+    </div>
+    <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    <a class="back" href="index.html">← Retour à l'accueil</a>
+  </div>
+</main>
+
+<nav class="tabbar" aria-label="Navigation mobile"><a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg><span>Accueil</span></a><a href="temoignage.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3v-3H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg><span>Témoignages</span></a><a href="connexion.html" aria-current="page" id="tabAccount"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Compte</span></a></nav>
+<script>
+  (function(){
+    try { var s = JSON.parse(localStorage.getItem("wahgnu_session")||"null");
+      if(s && s.pseudo) document.getElementById("tabAccount").setAttribute("href","profile.html"); } catch(e){}
+  })();
+</script>
+<script>
+  // Thème clair / sombre
+  (function(){
+    var root = document.documentElement, btn = document.getElementById('themeToggle');
+    var saved = null;
+    try { saved = localStorage.getItem('wakhnu_theme'); } catch(e){}
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('wakhnu_theme', next); } catch(e){}
+    });
+  })();
+
+  var avatars = Array.from(new Set(['😀','😎','🤓','😍','🥳','🤖','👽','🦄','🐱','🐶','🦊','🐻','🐼','🐨','🐯','🦁','🐸','🐵','🙈','🙉','🙊','🐔','🐧','🐦','🐤','🐣','🐥','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🐝','🐛','🦋','🐌','🐞','🐜','🦗','🕷️','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🦐','🦞','🦀','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🐊','🐅','🐆','🦓','🦍','🦧','🐘','🦛','🦏','🐪','🐫','🦒','🦘','🐃','🐂','🐄','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🐩','🦮','🐕‍🦺','🐈','🐈‍⬛','🪶','🐓','🦃','🦚','🦜','🦢','🦩','🕊️','🐇','🦝','🦨','🦡','🦦','🦥','🐁','🐀','🐿️','🦔']));
+  var selected = '👤', photo = null;
+  var msg = document.getElementById('msg');
+
+  function loadUsers(){ try{ return JSON.parse(localStorage.getItem('wahgnu_users') || '[]'); }catch(e){ return []; } }
+  function saveUsers(u){ try{ localStorage.setItem('wahgnu_users', JSON.stringify(u)); return true; }catch(e){ return false; } }
+  function loadSession(){ try{ return JSON.parse(localStorage.getItem('wahgnu_session') || 'null'); }catch(e){ return null; } }
+
+  var session = loadSession();
+  if(!session){ window.location.replace('connexion.html'); }
+  var users = loadUsers();
+  var me = session ? users.find(function(u){ return u.pseudo === session.pseudo; }) : null;
+  if(session && !me){ window.location.replace('connexion.html'); }
+
+  function renderCurrent(){
+    var c = document.getElementById('currentAvatar');
+    c.textContent = '';
+    if(photo){ var im = document.createElement('img'); im.src = photo; im.alt = 'Ta photo de profil'; c.appendChild(im); }
+    else c.textContent = selected;
+    document.getElementById('photoRemove').style.display = photo ? '' : 'none';
+    document.querySelectorAll('#avatarSelector .opt').forEach(function(o){
+      o.setAttribute('aria-pressed', (!photo && o.textContent === selected) ? 'true' : 'false');
+    });
+  }
+
+  if(me){
+    selected = me.avatar || '👤';
+    photo = me.photo || null;
+    document.getElementById('pseudo').textContent = me.pseudo;
+  }
+
+  var grid = document.getElementById('avatarSelector');
+  avatars.forEach(function(emoji){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'opt'; b.textContent = emoji;
+    b.setAttribute('aria-label', 'Avatar ' + emoji);
+    b.addEventListener('click', function(){ selected = emoji; photo = null; msg.textContent = ''; renderCurrent(); });
+    grid.appendChild(b);
+  });
+  renderCurrent();
+
+  // Photo choisie dans la galerie : recadrée en carré et réduite
+  function processImage(file, max, quality){
+    return new Promise(function(resolve, reject){
+      if(!file || !/^image\//.test(file.type)) return reject(new Error('type'));
+      var fr = new FileReader();
+      fr.onerror = reject;
+      fr.onload = function(){
+        var img = new Image();
+        img.onerror = reject;
+        img.onload = function(){
+          var s = Math.min(img.width, img.height), sx = (img.width - s) / 2, sy = (img.height - s) / 2, size = Math.min(max, s);
+          var c = document.createElement('canvas'); c.width = size; c.height = size;
+          var ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size);
+          ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
+          resolve(c.toDataURL('image/jpeg', quality));
+        };
+        img.src = fr.result;
+      };
+      fr.readAsDataURL(file);
+    });
+  }
+  document.getElementById('photoBtn').addEventListener('click', function(){ document.getElementById('photoInput').click(); });
+  document.getElementById('photoInput').addEventListener('change', function(){
+    var f = this.files && this.files[0]; this.value = '';
+    if(!f) return;
+    processImage(f, 320, 0.85).then(function(url){ photo = url; msg.textContent = ''; renderCurrent(); })
+      .catch(function(){ msg.textContent = 'Cette image ne peut pas être utilisée.'; });
+  });
+  document.getElementById('photoRemove').addEventListener('click', function(){ photo = null; renderCurrent(); });
+
+  document.getElementById('saveBtn').addEventListener('click', function(){
+    if(!me) return;
+    var list = loadUsers();
+    var i = list.findIndex(function(u){ return u.pseudo === me.pseudo; });
+    if(i === -1) return;
+    list[i].avatar = selected;
+    if(photo) list[i].photo = photo; else delete list[i].photo;
+    if(saveUsers(list)){
+      msg.textContent = 'Profil mis à jour ✅';
+      setTimeout(function(){ window.location.href = 'temoignage.html'; }, 800);
+    } else {
+      msg.textContent = "Impossible d'enregistrer sur cet appareil (espace plein).";
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', function(){
+    try { localStorage.removeItem('wahgnu_session'); } catch(e){}
+    window.location.href = 'connexion.html';
+  });
+
+  document.getElementById('cancelBtn').addEventListener('click', function(){
+    window.location.href = 'index.html';
+  });
+</script>
+</body>
+</html>
