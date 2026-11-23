@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%23C8553D'/%3E%3Cg%20transform='translate(13%2012)%20scale(.74)'%3E%3Cpath%20d='M30%208H70A22%2022%200%200%201%2092%2030V54A22%2022%200%200%201%2070%2076H52L26%2095L30%2076A22%2022%200%200%201%208%2054V30A22%2022%200%200%201%2030%208Z'%20fill='%23FBF6EF'/%3E%3Cpath%20d='M50%2062C50%2062%2030%2049%2030%2036C30%2028%2036%2023%2042%2023C46%2023%2049%2025%2050%2028C51%2025%2054%2023%2058%2023C64%2023%2070%2028%2070%2036C70%2049%2050%2062%2050%2062Z'%20fill='%23C8553D'/%3E%3C/g%3E%3C/svg%3E" />
+<title>Connexion — WAKH NÜ</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf6ef; --bg-alt:#f4ebdf; --panel:#ffffff; --text:#2a1f1a; --muted:#6f625a;
+    --accent:#c8553d; --accent-dark:#a8412c; --accent-soft:#f6ded6; --green:#2f6f5e;
+    --danger:#b3261e; --border:rgba(42,31,26,.12); --shadow:0 12px 40px rgba(60,35,20,.12);
+  }
+  :root[data-theme="dark"]{
+    --bg:#15110f; --bg-alt:#1d1815; --panel:#221c19; --text:#f6ede4; --muted:#b3a498;
+    --accent:#e8765d; --accent-dark:#f08a73; --accent-soft:#3a2520; --green:#6fc2a9;
+    --danger:#ff8a80; --border:rgba(255,255,255,.12); --shadow:0 12px 40px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;min-height:100vh;display:flex;flex-direction:column;
+    font-family:'Poppins',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;
+    transition:background .3s,color .3s;
+  }
+  h1,h2{font-family:'Fraunces',Georgia,serif;margin:0;line-height:1.15}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 24px}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:24px;text-decoration:none}
+  .logo span{color:var(--accent)}
+  .logo{display:inline-flex;align-items:center;gap:10px}
+  .logo .wm{color:var(--text)}
+  .logo .wm span{color:var(--accent)}
+  .logo .mb{fill:var(--accent)}
+  .logo .mh{fill:var(--bg)}
+  .icon-btn{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--panel);
+    cursor:pointer;font-size:18px;display:grid;place-items:center;color:var(--text);
+  }
+
+  main{flex:1;display:grid;place-items:center;padding:20px}
+  .box{
+    width:min(460px,100%);background:var(--panel);border:1px solid var(--border);
+    border-radius:28px;box-shadow:var(--shadow);padding:34px 30px;
+  }
+  .box h1{font-size:32px;text-align:center;margin-bottom:6px}
+  .sub{text-align:center;color:var(--muted);font-size:15px;margin:0 0 24px}
+
+  .tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--bg-alt);border-radius:999px;padding:5px;margin-bottom:24px}
+  .tab{
+    border:0;background:transparent;padding:11px;border-radius:999px;cursor:pointer;
+    font:600 15px 'Poppins',sans-serif;color:var(--muted);transition:.2s;
+  }
+  .tab[aria-selected="true"]{background:var(--accent);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 35%,transparent)}
+
+  form{display:none}
+  form.active{display:block}
+  label{display:block;font-size:14px;font-weight:500;margin:14px 0 6px}
+  input{
+    width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid var(--border);
+    background:var(--bg);color:var(--text);font:400 16px 'Poppins',sans-serif;transition:border-color .2s;
+  }
+  input:focus{outline:none;border-color:var(--accent)}
+  .btn{
+    width:100%;margin-top:22px;padding:14px;border-radius:999px;border:0;cursor:pointer;
+    background:var(--accent);color:#fff;font:600 16px 'Poppins',sans-serif;
+    box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 35%,transparent);transition:.2s;
+  }
+  .btn:hover{background:var(--accent-dark);transform:translateY(-2px)}
+  .link-btn{
+    display:block;margin:14px auto 0;background:none;border:0;cursor:pointer;
+    color:var(--muted);font:400 14px 'Poppins',sans-serif;text-decoration:underline;
+  }
+  .msg{min-height:22px;margin-top:16px;text-align:center;font-size:14px;font-weight:500}
+  .msg.error{color:var(--danger)}
+  .msg.ok{color:var(--green)}
+  .note{margin-top:20px;padding:12px 14px;border-radius:14px;background:var(--accent-soft);color:var(--accent-dark);font-size:13px;text-align:center}
+  .back{display:block;text-align:center;margin-top:18px;color:var(--muted);font-size:14px}
+  @media (prefers-reduced-motion:reduce){.btn,.tab{transition:none}}
+  @media (max-width:420px){.box{padding:26px 20px}}
+  .toplink{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px;color:var(--muted)}
+  .toplink:hover{background:var(--accent-soft);color:var(--accent-dark)}
+  @media (max-width:560px){.toplink{display:none}.top{padding:14px 16px}}
+
+  /* Logo animé */
+  .logo svg{overflow:visible;flex:none}
+  .logo .mb{transform-box:fill-box;transform-origin:50% 90%;animation:lgIn .7s cubic-bezier(.2,1.4,.4,1) both}
+  .logo .mh{transform-box:fill-box;transform-origin:center;animation:lgPop .6s .3s cubic-bezier(.2,1.7,.4,1) both,lgBeat 2.6s 1.4s ease-in-out infinite}
+  .logo:hover svg{animation:lgWiggle .7s ease}
+  @keyframes lgIn{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+  @keyframes lgPop{from{transform:scale(0)}to{transform:scale(1)}}
+  @keyframes lgBeat{0%,50%,100%{transform:scale(1)}12%{transform:scale(1.2)}24%{transform:scale(1)}36%{transform:scale(1.12)}}
+  @keyframes lgWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}50%{transform:rotate(7deg)}75%{transform:rotate(-4deg)}}
+  @media (prefers-reduced-motion:reduce){.logo .mb,.logo .mh,.logo:hover svg{animation:none}}
+  /* Fond doux */
+  body{background-image:radial-gradient(700px 320px at 92% -4%,var(--accent-soft),transparent 70%);background-repeat:no-repeat}
+  /* Barre de navigation mobile */
+  .tabbar{display:none}
+  @media (max-width:640px){
+    body{padding-bottom:78px}
+    .tabbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;
+      background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border-top:1px solid var(--border);padding:6px 10px calc(6px + env(safe-area-inset-bottom));gap:6px}
+    .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 4px;border-radius:14px;
+      text-decoration:none;font:500 11px 'Poppins',sans-serif;color:var(--muted)}
+    .tabbar svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .tabbar a[aria-current="page"]{color:var(--accent-dark);background:var(--accent-soft)}
+  }
+
+  a.btn{display:block;text-align:center;text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--text);border:2px solid var(--border);box-shadow:none;margin-top:12px}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent-dark);background:transparent}
+  .av{width:92px;height:92px;margin:0 auto 14px;border-radius:50%;background:var(--accent-soft);border:3px solid var(--accent);display:grid;place-items:center;font-size:46px}
+  .who{margin:0 0 6px;font-size:16px}
+  .av{overflow:hidden}
+  .av img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="logo" href="index.html" aria-label="WAKH NÜ, retour à l'accueil"><svg viewBox="0 0 100 100" width="34" height="34" aria-hidden="true"><path class="mb" d="M30 8H70A22 22 0 0 1 92 30V54A22 22 0 0 1 70 76H52L26 95L30 76A22 22 0 0 1 8 54V30A22 22 0 0 1 30 8Z"/><path class="mh" d="M50 62C50 62 30 49 30 36C30 28 36 23 42 23C46 23 49 25 50 28C51 25 54 23 58 23C64 23 70 28 70 36C70 49 50 62 50 62Z"/></svg><span class="wm">WAKH <span>NÜ</span></span></a>
+  <div style="display:flex;align-items:center;gap:6px"><a href="index.html" class="toplink">Accueil</a><a href="temoignage.html" class="toplink">Témoignages</a><button class="icon-btn" id="themeToggle" aria-label="Changer de thème clair/sombre" title="Thème clair / sombre">🌓</button></div>
+</div>
+
+<main>
+  <div class="box">
+    <h1>Dalal ak diam</h1>
+    <p class="sub">Connecte-toi ou crée ton compte pour rejoindre WAKH NÜ.</p>
+
+    <div id="already" style="display:none;text-align:center">
+      <div class="av" id="alreadyAvatar">👤</div>
+      <p class="who">Tu es connecté en tant que <b id="alreadyName"></b>.</p>
+      <a class="btn" href="temoignage.html">Aller aux témoignages</a>
+      <a class="btn ghost" href="profile.html">Mon profil</a>
+      <button type="button" class="btn ghost" id="alreadyLogout">Se déconnecter</button>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Connexion ou inscription">
+      <button class="tab" role="tab" id="tab-login" aria-controls="login-form" aria-selected="false">Connexion</button>
+      <button class="tab" role="tab" id="tab-signup" aria-controls="signup-form" aria-selected="true">Inscription</button>
+    </div>
+
+    <!-- Connexion -->
+    <form id="login-form" role="tabpanel" aria-labelledby="tab-login" novalidate>
+      <label for="loginId">Pseudo ou email</label>
+      <input id="loginId" type="text" autocomplete="username" placeholder="ex : Luna42" />
+      <label for="loginPwd">Mot de passe</label>
+      <input id="loginPwd" type="password" autocomplete="current-password" />
+      <button type="submit" class="btn" id="loginBtn">Se connecter</button>
+      <button type="button" class="link-btn" id="forgotBtn">Mot de passe oublié ?</button>
+    </form>
+
+    <!-- Inscription -->
+    <form id="signup-form" class="active" role="tabpanel" aria-labelledby="tab-signup" novalidate>
+      <label for="signupPseudo">Pseudo</label>
+      <input id="signupPseudo" type="text" autocomplete="nickname" maxlength="30" placeholder="Choisis un pseudo (pas ton vrai nom)" />
+      <label for="signupEmail">Email</label>
+      <input id="signupEmail" type="email" autocomplete="email" placeholder="ton@email.com" />
+      <label for="signupPwd">Mot de passe</label>
+      <input id="signupPwd" type="password" autocomplete="new-password" />
+      <button type="submit" class="btn" id="signupBtn">Créer mon compte</button>
+    </form>
+
+    <div class="msg" id="msg" role="status" aria-live="polite"></div>
+
+    <div class="note">Version de démonstration : les comptes sont enregistrés uniquement dans ton navigateur.</div>
+    <a class="back" href="index.html">← Retour à l'accueil</a>
+  </div>
+</main>
+
+<nav class="tabbar" aria-label="Navigation mobile"><a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/></svg><span>Accueil</span></a><a href="temoignage.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3v-3H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg><span>Témoignages</span></a><a href="connexion.html" aria-current="page" id="tabAccount"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>Compte</span></a></nav>
+<script>
+  (function(){
+    try { var s = JSON.parse(localStorage.getItem("wahgnu_session")||"null");
+      if(s && s.pseudo) document.getElementById("tabAccount").setAttribute("href","profile.html"); } catch(e){}
+  })();
+</script>
+<script>
+  // Thème clair / sombre
+  (function(){
+    var root = document.documentElement, btn = document.getElementById('themeToggle');
+    var saved = null;
+    try { saved = localStorage.getItem('wakhnu_theme'); } catch(e){}
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('wakhnu_theme', next); } catch(e){}
+    });
+  })();
+
+  // Onglets
+  var tabLogin = document.getElementById('tab-login');
+  var tabSignup = document.getElementById('tab-signup');
+  var formLogin = document.getElementById('login-form');
+  var formSignup = document.getElementById('signup-form');
+  var msg = document.getElementById('msg');
+
+  function say(text, type){ msg.textContent = text || ''; msg.className = 'msg' + (type ? ' ' + type : ''); }
+
+  function showTab(which){
+    var isLogin = which === 'login';
+    tabLogin.setAttribute('aria-selected', isLogin);
+    tabSignup.setAttribute('aria-selected', !isLogin);
+    formLogin.classList.toggle('active', isLogin);
+    formSignup.classList.toggle('active', !isLogin);
+    say('');
+  }
+  tabLogin.addEventListener('click', function(){ showTab('login'); });
+  tabSignup.addEventListener('click', function(){ showTab('signup'); });
+
+  document.getElementById('forgotBtn').addEventListener('click', function(){
+    say('La récupération du mot de passe sera bientôt disponible.', '');
+  });
+
+  // Comptes (stockage local, version de démonstration)
+  function loadUsers(){ try{ return JSON.parse(localStorage.getItem('wahgnu_users') || '[]'); }catch(e){ return []; } }
+  function saveUsers(u){ try{ localStorage.setItem('wahgnu_users', JSON.stringify(u)); return true; }catch(e){ return false; } }
+  function hashPwd(p){ return btoa(unescape(encodeURIComponent(p))); } // simple, pour la démo
+
+  formSignup.addEventListener('submit', function(e){
+    e.preventDefault();
+    var pseudo = document.getElementById('signupPseudo').value.trim();
+    var email = document.getElementById('signupEmail').value.trim();
+    var pwd = document.getElementById('signupPwd').value;
+    if(!pseudo || !email || !pwd) return say('Remplis tous les champs pour créer un compte.', 'error');
+    if(email.indexOf('@') < 1) return say('Entre une adresse email valide.', 'error');
+    var users = loadUsers();
+    if(users.some(function(u){ return u.email === email; })) return say('Un compte avec cet email existe déjà.', 'error');
+    if(users.some(function(u){ return u.pseudo === pseudo; })) return say('Ce pseudo est déjà pris.', 'error');
+    users.push({pseudo: pseudo, email: email, pwd: hashPwd(pwd), avatar: '👤'});
+    if(!saveUsers(users)) return say("Impossible d'enregistrer le compte sur cet appareil.", 'error');
+    formSignup.reset();
+    showTab('login');
+    say('Compte créé ✅ Tu peux maintenant te connecter.', 'ok');
+  });
+
+  formLogin.addEventListener('submit', function(e){
+    e.preventDefault();
+    var id = document.getElementById('loginId').value.trim();
+    var pwd = document.getElementById('loginPwd').value;
+    if(!id || !pwd) return say('Identifiant et mot de passe requis.', 'error');
+    var user = loadUsers().find(function(u){ return u.email === id || u.pseudo === id; });
+    if(!user || user.pwd !== hashPwd(pwd)) return say('Identifiant ou mot de passe incorrect.', 'error');
+    try { localStorage.setItem('wahgnu_session', JSON.stringify({pseudo: user.pseudo, email: user.email})); } catch(err){}
+    say('Connexion réussie ✅ Redirection…', 'ok');
+    setTimeout(function(){ window.location.href = 'index.html'; }, 700);
+  });
+
+  // Déjà connecté ?
+  function currentSession(){ try{ var x = JSON.parse(localStorage.getItem('wahgnu_session') || 'null'); return x && x.pseudo ? x : null; }catch(e){ return null; } }
+  var tabsBar = document.querySelector('.tabs'), noteBox = document.querySelector('.note');
+  function refreshAuth(){
+    var sess = currentSession();
+    document.getElementById('already').style.display = sess ? 'block' : 'none';
+    tabsBar.style.display = sess ? 'none' : '';
+    noteBox.style.display = sess ? 'none' : '';
+    if(sess){
+      formLogin.classList.remove('active'); formSignup.classList.remove('active'); say('');
+      document.getElementById('alreadyName').textContent = sess.pseudo;
+      var av = '👤', ph = null;
+      loadUsers().forEach(function(u){ if(u.pseudo === sess.pseudo){ if(u.avatar) av = u.avatar; if(u.photo) ph = u.photo; } });
+      var abox = document.getElementById('alreadyAvatar'); abox.textContent = '';
+      if(ph){ var im = document.createElement('img'); im.src = ph; im.alt = ''; abox.appendChild(im); } else { abox.textContent = av; }
+    }
+  }
+  document.getElementById('alreadyLogout').addEventListener('click', function(){
+    try{ localStorage.removeItem('wahgnu_session'); }catch(e){}
+    refreshAuth(); showTab('login'); say('Déconnexion réussie ✅', 'ok');
+  });
+  refreshAuth();
+</script>
+</body>
+</html>
